@@ -767,6 +767,9 @@ $('btnFocus').onclick=()=>{
   $('btnFocus').classList.toggle('primary',on);
   toast(on?'Modo foco: só o texto. Toque de novo para sair.':'Modo foco desligado.');
 };
+
+document.body.classList.toggle('focus');
+  
 let speakingChap=0;
 function stopAudio(){
   try{ speechSynthesis.cancel(); }catch(e){}
