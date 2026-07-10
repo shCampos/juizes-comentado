@@ -303,33 +303,42 @@ button.lex:hover{color:var(--bronze)}
 .chips button{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 11px;font-size:11.5px;font-weight:600;color:var(--moss-deep)}
 .chips button:hover{border-color:var(--bronze);color:var(--bronze)}
 
-/* ========== DEVOCIONAL DIÁRIO / FEED / CELEBRAÇÃO / TRILHA ========== */
-.devsteps .stp{margin-bottom:14px}
-.devsteps .stpt{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);font-weight:600;margin-bottom:5px}
-.devsteps .vv{font-family:var(--serif);font-size:16.5px;line-height:1.75;background:var(--bronze-wash);border:1px solid var(--bronze);border-radius:10px;padding:12px 14px}
-.devsteps .vref{font-family:var(--display);font-weight:600;color:var(--moss-deep);margin-top:6px;font-size:13px}
-.devsteps .qq2{font-family:var(--serif);font-size:15.5px;line-height:1.65}
-.devsteps input{width:100%;border:1px solid var(--sand);border-left:3px solid var(--bronze);border-radius:8px;background:var(--card);padding:11px 13px;font-family:var(--serif);font-size:15px;color:var(--ink)}
-.devsteps input:focus{outline:none;border-color:var(--bronze)}
-.donebadge{display:inline-flex;align-items:center;gap:6px;background:var(--moss-wash);border:1px solid var(--moss);color:var(--moss-deep);border-radius:999px;padding:7px 13px;font-size:12.5px;font-weight:600}
-.feeditem{display:flex;gap:8px;align-items:baseline;border-bottom:1px solid var(--line);padding:7px 0;font-size:12.5px;cursor:pointer;border-radius:6px}
-.feeditem:last-child{border-bottom:none}
-.feeditem:hover{color:var(--moss-deep)}
-.feeditem b{color:var(--moss-deep)}
-.feeditem .fw{flex:1}
-.feeditem .ft{color:var(--ink-soft);font-size:11px;white-space:nowrap}
-.presline{font-size:13px;line-height:1.6}
-.presline .dotg{display:inline-block;width:9px;height:9px;border-radius:50%;background:#5C9E4C;margin-right:6px}
-.celebrate{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:rgba(20,22,16,.45);animation:fadein .15s ease}
-.celebrate .cb{background:var(--paper);border:1px solid var(--bronze);border-radius:18px;padding:30px 34px;text-align:center;max-width:340px;animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
-.celebrate .ce{font-size:44px;margin-bottom:8px}
-.celebrate .ct{font-family:var(--display);font-size:21px;font-weight:700;color:var(--moss-deep);margin-bottom:6px}
-.celebrate .cs{font-size:13px;color:var(--ink-soft);line-height:1.6}
-@keyframes pop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
-@media (prefers-reduced-motion:reduce){.celebrate,.celebrate .cb{animation:none}}
+/* ========== DEVOCIONAL DIÁRIO / SOCIAL / TRILHA ========== */
+.daily-done{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--moss-deep);font-size:14px;margin-bottom:8px}
+.fitem{display:flex;gap:9px;align-items:baseline;border-top:1px solid var(--line);padding:8px 0;cursor:pointer;border-radius:6px}
+.fitem:first-of-type{border-top:none}
+.fitem:hover .ftx{color:var(--moss-deep)}
+.fitem .fref{font-family:var(--display);font-weight:600;color:var(--bronze);font-size:12.5px;min-width:44px}
+.fitem .ftx{font-size:12.5px;color:var(--ink);flex:1}
+.fitem .ftx b{color:var(--moss-deep)}
+.fitem .fwhen{font-size:10.5px;color:var(--ink-soft);flex-shrink:0}
+.starters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.starters button{border:1px dashed var(--line);background:none;border-radius:999px;padding:5px 11px;font-size:11.5px;color:var(--ink-soft);font-style:italic}
+.starters button:hover{border-color:var(--bronze);color:var(--bronze)}
 .chap-btn.done{background:var(--moss-wash);border-color:var(--moss)}
-.chap-btn.done .c::after{content:' ✓';color:var(--moss);font-weight:700}
-.chap-btn.done.active{background:var(--moss-deep);border-color:var(--moss-deep)}
+.chap-btn.done .n::after{content:' ✓';font-size:10px;color:var(--moss)}
+.trail{padding:0 20px 12px;border-bottom:1px solid var(--line)}
+.trail .tlbl{font-size:11px;color:var(--ink-soft);margin-bottom:5px}
+.trail .tlbl b{color:var(--moss-deep)}
+.trail .tbar{height:5px;background:var(--sand);border-radius:3px;overflow:hidden}
+.trail .tbar span{display:block;height:100%;background:var(--moss);border-radius:3px;transition:width .3s ease}
+@media (prefers-reduced-motion:reduce){.trail .tbar span{transition:none}}
+@media (max-width:860px){.trail{display:none}}
+.dstep{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);font-weight:600;margin-bottom:8px}
+.dverse{font-family:var(--serif);font-size:17px;line-height:1.75;margin-bottom:6px}
+.dref{font-family:var(--display);font-weight:600;color:var(--moss-deep);margin-bottom:14px}
+.dq{font-family:var(--serif);font-size:15.5px;font-weight:600;margin-bottom:10px}
+.dinput{width:100%;min-height:64px;resize:vertical;font-family:var(--serif);font-size:15px;line-height:1.6;color:var(--ink);background:var(--card);border:1px solid var(--sand);border-left:3px solid var(--bronze);border-radius:6px;padding:10px 12px;margin-bottom:12px}
+.dinput:focus{outline:none;border-color:var(--bronze)}
+.dfoot2{display:flex;gap:8px;justify-content:flex-end}
+.dskip{font-size:11.5px;color:var(--ink-soft);margin-right:auto;align-self:center}
+.celebrate{text-align:center;padding:8px 4px 4px}
+.celebrate .leaf{font-size:52px;display:inline-block;animation:pop .5s ease}
+@keyframes pop{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){.celebrate .leaf{animation:none}}
+.celebrate h4{font-family:var(--display);font-size:20px;color:var(--moss-deep);margin:8px 0 4px}
+.celebrate .bless{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--ink-soft);margin:8px 0 14px}
+.celebrate .streakline{font-size:14px;font-weight:600;color:var(--bronze);margin-bottom:12px}
 
 /* ========== MENU SUSPENSO / RECURSOS ========== */
 .dd{position:relative}
@@ -498,6 +507,8 @@ body.focus .verse{border-bottom-color:transparent;padding:8px 0}
       <button id="planGo">Ir para a leitura da semana</button>
     </div>
     <div class="progress-all"><span id="overall"><b>0</b> comentários da turma</span></div>
+    <div class="trail"><div class="tlbl">Sua trilha: <b id="trailN">0</b> de 21 capítulos</div>
+      <div class="tbar"><span id="trailBar" style="width:0%"></span></div></div>
     <div class="chap-label">Capítulos</div>
     <nav class="chap-grid" id="chapGrid" aria-label="Capítulos"></nav>
     <div class="side-foot">✦ marca seus comentários · ★ seus destaques. Dúvidas: <a href="mailto:shcampos2@gmail.com">shcampos2@gmail.com</a></div>
@@ -725,10 +736,9 @@ const QS = collection(db,'perguntas');
 const DEN = collection(db,'denuncias');
 const DEVO = collection(db,'devocionais');
 const MEM = collection(db,'memoria');
-const PRES = collection(db,'presenca');
-const DIA = collection(db,'diario');
+const DIARIO = collection(db,'diario');
 
-let user=null, all={}, likes={}, favs=new Map(), perguntas={}, denuncias=[], dev={}, mem={}, live={on:false,c:1,v:1}, follow=false, pres={}, presMine=new Set();
+let user=null, all={}, likes={}, favs=new Map(), perguntas={}, denuncias=[], dev={}, mem={}, diario={}, live={on:false,c:1,v:1}, follow=false;
 let cur=1;
 let subs=[];
 
@@ -911,91 +921,93 @@ function votd(){
   }
   return {c:1,v:1,text:BOOK.chapters[0][0]};
 }
-function dayStr(d){
-  const p=x=>String(x).padStart(2,'0');
-  return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());
+const MEDQ=[
+ 'O que este versículo revela sobre o caráter de Deus?',
+ 'Que atitude este versículo confronta em mim hoje?',
+ 'Se eu cresse nisso de verdade, o que mudaria no meu dia?',
+ 'Que palavra deste versículo eu levaria comigo hoje? Por quê?',
+ 'O que este texto me leva a agradecer?',
+ 'Onde eu me vejo nesta cena?',
+ 'Que promessa ou aviso há aqui para mim?',
+ 'Como este versículo se parece (ou não) com a minha vida agora?',
+ 'O que obedecer a este texto custaria para mim?',
+ 'Que oração nasce naturalmente deste versículo?'];
+function todayKey(){
+  const d=new Date();
+  return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();
 }
-function streak(){
-  let n=0, d=new Date();
-  if(!presMine.has(dayStr(d))) d.setDate(d.getDate()-1);
-  while(presMine.has(dayStr(d))){ n++; d.setDate(d.getDate()-1); }
-  return n;
-}
-function timeAgo(ts){
-  const m=Math.floor((Date.now()-ts)/60000);
-  if(m<1) return 'agora';
-  if(m<60) return 'há '+m+' min';
-  const h=Math.floor(m/60);
-  if(h<24) return 'há '+h+' h';
-  return 'há '+Math.floor(h/24)+' d';
-}
-const MEDIT_QS=[
- 'O que este versículo revela sobre quem Deus é?',
- 'Que atitude este versículo me convida a mudar hoje?',
- 'Se eu levasse este versículo a sério, o que faria diferente esta semana?',
- 'Que promessa ou aviso há aqui para a minha vida?',
- 'O que este versículo diz sobre o coração humano, inclusive o meu?',
- 'Por que Deus quis que este versículo estivesse na Bíblia?',
- 'Como este versículo aponta para a minha necessidade de Deus?',
- 'Que pecado, desculpa ou medo este versículo expõe em mim?',
- 'A quem eu poderia abençoar compartilhando esta verdade hoje?',
- 'O que me impede de obedecer ao que este versículo ensina?',
- 'Como eu explicaria este versículo para um amigo em uma frase?',
- 'Que motivo de gratidão este versículo desperta em mim?',
- 'Onde eu tenho feito \'o que parece reto aos meus olhos\' em vez de buscar a Deus?',
- 'Que característica de Deus neste texto eu quero imitar?',
- 'O que eu preciso entregar a Deus em oração depois desta leitura?'
-];
-const BLESS=[
- '\'O SENHOR te abençoe e te guarde.\' (Nm 6.24)',
- '\'Esforça-te, e tem bom ânimo.\' (Js 1.9)',
- '\'Lâmpada para os meus pés é a tua palavra.\' (Sl 119.105)'
-];
-function celebrate(emoji,titulo,sub){
-  const ov=document.createElement('div'); ov.className='celebrate';
-  ov.innerHTML=`<div class="cb"><div class="ce">${emoji}</div><div class="ct"></div><div class="cs"></div></div>`;
-  ov.querySelector('.ct').textContent=titulo;
-  ov.querySelector('.cs').textContent=sub;
-  ov.onclick=()=>ov.remove();
-  document.body.appendChild(ov);
-  setTimeout(()=>ov.remove(),2600);
-}
-async function concluirDevocional(d,ora){
-  const dy=dayStr(new Date());
-  try{
-    await setDoc(doc(db,'presenca','jz_'+dy+'_'+user.uid),
-      {b:'jz',day:dy,uid:user.uid,name:firstName(user.displayName||user.email),ts:Date.now()});
-    if(ora&&ora.trim())
-      await setDoc(doc(db,'diario','jz_'+dy+'_'+user.uid),
-        {b:'jz',day:dy,uid:user.uid,ora:ora.trim().slice(0,2000)});
-    presMine.add(dy);
-    closeModal();
-    celebrate('🕊','Devocional concluído!','🔥 '+streak()+' dia(s) seguidos · '+BLESS[Math.floor(Math.random()*BLESS.length)]);
-    if(view==='home') renderHome();
-  }catch(e){ toast('Falha ao registrar. Verifique a conexão.'); }
-}
-function openDevocional(d){
-  const doy=Math.floor(Date.now()/86400000);
-  const q=MEDIT_QS[doy%MEDIT_QS.length];
-  const wrap=document.createElement('div'); wrap.className='devsteps';
-  wrap.innerHTML=`
-    <div class="stp"><div class="stpt">1 · Leia</div>
-      <div class="vv" id="dvv"></div>
-      <div class="vref">Juízes ${d.c}:${d.v}</div></div>
-    <div class="stp"><div class="stpt">2 · Medite</div>
-      <div class="qq2">${q}</div></div>
-    <div class="stp"><div class="stpt">3 · Ore</div>
-      <input id="dora" maxlength="300" placeholder="Escreva sua oração em uma linha… (privado, opcional)"></div>
-    <div style="display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap">
-      <button class="btn" id="dopen">Abrir no capítulo</button>
-      <button class="btn primary" id="ddone">✓ Concluir devocional</button>
-    </div>`;
-  lexify(wrap.querySelector('#dvv'),d.text);
-  wrap.querySelector('#dopen').onclick=()=>{ closeModal(); showView('read'); goTo(d.c,d.v); };
-  wrap.querySelector('#ddone').onclick=()=>concluirDevocional(d,wrap.querySelector('#dora').value);
+function keyToDate(k){ return new Date(Math.floor(k/10000), Math.floor(k/100)%100-1, k%100); }
+function dailyFlow(d){
+  const day=todayKey();
+  const prev=diario[day]||{med:'',ora:''};
+  const q=MEDQ[Math.floor(Date.now()/86400000)%MEDQ.length];
+  const wrap=document.createElement('div');
+  let med=prev.med, ora=prev.ora, step=0;
+  function render(){
+    wrap.innerHTML='';
+    if(step===0){
+      wrap.innerHTML=`<div class="dstep">Passo 1 de 3 · Leia</div>
+        <div class="dverse" id="dvx"></div><div class="dref">Juízes ${d.c}:${d.v}</div>`;
+      lexify(wrap.querySelector('#dvx'),d.text);
+      const f=document.createElement('div'); f.className='dfoot2';
+      const n=document.createElement('button'); n.className='btn primary'; n.textContent='Li com calma →';
+      n.onclick=()=>{step=1;render();};
+      f.appendChild(n); wrap.appendChild(f);
+    } else if(step===1){
+      wrap.innerHTML=`<div class="dstep">Passo 2 de 3 · Medite</div><div class="dq">${q}</div>`;
+      const ta=document.createElement('textarea'); ta.className='dinput';
+      ta.placeholder='Escreva em uma ou duas linhas… (opcional)'; ta.value=med;
+      ta.oninput=()=>med=ta.value;
+      const f=document.createElement('div'); f.className='dfoot2';
+      const b1=document.createElement('button'); b1.className='btn'; b1.textContent='← Voltar';
+      b1.onclick=()=>{step=0;render();};
+      const b2=document.createElement('button'); b2.className='btn primary'; b2.textContent='Continuar →';
+      b2.onclick=()=>{step=2;render();};
+      f.append(b1,b2); wrap.append(ta,f);
+      ta.focus();
+    } else if(step===2){
+      wrap.innerHTML=`<div class="dstep">Passo 3 de 3 · Ore</div>
+        <div class="dq">Transforme o versículo em oração, com as suas palavras:</div>`;
+      const ta=document.createElement('textarea'); ta.className='dinput';
+      ta.placeholder='Senhor, hoje eu…'; ta.value=ora;
+      ta.oninput=()=>ora=ta.value;
+      const f=document.createElement('div'); f.className='dfoot2';
+      const sk=document.createElement('span'); sk.className='dskip'; sk.textContent='Meditação e oração são privadas: só você lê.';
+      const b1=document.createElement('button'); b1.className='btn'; b1.textContent='← Voltar';
+      b1.onclick=()=>{step=1;render();};
+      const b2=document.createElement('button'); b2.className='btn primary'; b2.textContent='Concluí 🙏';
+      b2.onclick=async()=>{
+        b2.disabled=true;
+        try{
+          await setDoc(doc(db,'diario','d_'+day+'_'+user.uid),
+            {b:'jz',uid:user.uid,day,med:med.slice(0,2000),ora:ora.slice(0,2000)});
+          diario[day]={med,ora};
+          step=3; render();
+        }catch(e){ toast('Falha ao salvar. Tente de novo.'); b2.disabled=false; }
+      };
+      f.append(sk,b1,b2); wrap.append(ta,f);
+      ta.focus();
+    } else {
+      wrap.innerHTML=`<div class="celebrate">
+        <span class="leaf">🌿</span>
+        <h4>Devocional concluído!</h4>
+        <div class="streakline">🔥 ${streak()} ${streak()===1?'dia':'dias'} seguidos com a Palavra</div>
+        <div class="bless">"O SENHOR te abençoe e te guarde." (Nm 6.24)</div>
+        <button class="btn primary" id="celOk">Amém</button>
+      </div>`;
+      wrap.querySelector('#celOk').onclick=()=>{ closeModal(); if(view==='home') renderHome(); };
+    }
+  }
+  render();
   openModal('Devocional de 5 minutos',wrap);
 }
-
+function streak(){
+  const days=new Set(Object.keys(diario).map(k=>keyToDate(+k).toDateString()));
+  let n=0, d=new Date();
+  if(!days.has(d.toDateString())) d.setDate(d.getDate()-1);
+  while(days.has(d.toDateString())){ n++; d.setDate(d.getDate()-1); }
+  return n;
+}
 function renderHome(){
   const h=new Date().getHours();
   const saud=h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';
@@ -1011,18 +1023,20 @@ function renderHome(){
     <div class="sub">Ler · Estudar · Meditar · Orar</div>
     <div class="hgrid">
       <div class="hcard gold" style="grid-column:1/-1">
-        <div class="t">Devocional do dia · 5 minutos</div>
+        <div class="t">Devocional de 5 minutos</div>
+        ${diario[todayKey()]?'<div class="daily-done">✓ Concluído hoje · 🔥 '+streak()+' '+(streak()===1?'dia':'dias')+' seguidos</div>':''}
         <div class="votd" id="votdText"></div>
         <div class="ref">Juízes ${d.c}:${d.v}</div>
-        <div class="row" id="devoRow"></div>
+        <div class="row">
+          <button class="btn primary" id="dailyBtn">${diario[todayKey()]?'Rever devocional de hoje':'🕊 Fazer devocional (5 min)'}</button>
+          <button class="btn" id="votdGo">Abrir no capítulo</button>
+          <button class="btn" id="votdCard">🖼 Gerar card</button>
+        </div>
       </div>
-      <div class="hcard">
+      <div class="hcard" style="grid-column:1/-1">
         <div class="t">A turma hoje</div>
-        <div class="presline" id="turmaHoje"></div>
-      </div>
-      <div class="hcard">
-        <div class="t">Atividade recente</div>
-        <div id="feedList"></div>
+        <div id="socLine" style="font-weight:600;font-size:14px;margin-bottom:6px"></div>
+        <div id="socFeed"></div>
       </div>
       <div class="hcard">
         <div class="t">Plano da semana · ${w+1} de ${PLAN.length}</div>
@@ -1054,49 +1068,35 @@ function renderHome(){
     </div>`;
   el.querySelector('.hi .hl').textContent=name;
   const vt=el.querySelector('#votdText'); lexify(vt,d.text);
-  // devocional do dia
-  const row=el.querySelector('#devoRow');
-  const doneToday=presMine.has(dayStr(new Date()));
-  if(doneToday){
-    const bd=document.createElement('span'); bd.className='donebadge';
-    bd.textContent='✓ Concluído hoje · 🔥 '+streak()+' dia(s)';
-    row.appendChild(bd);
-  } else {
-    const go=document.createElement('button'); go.className='btn primary';
-    go.textContent='🕊 Começar devocional';
-    go.onclick=()=>openDevocional(d);
-    row.appendChild(go);
-  }
-  const op=document.createElement('button'); op.className='btn'; op.textContent='Abrir no capítulo';
-  op.onclick=()=>{ showView('read'); goTo(d.c,d.v); };
-  const cd=document.createElement('button'); cd.className='btn'; cd.textContent='🖼 Card';
-  cd.onclick=()=>makeCard(d.c,d.v,d.text);
-  row.append(op,cd);
-
-  // presença da turma hoje
-  const hoje=pres[dayStr(new Date())]||{};
-  const nomes=Object.entries(hoje).filter(([uid])=>uid!==user.uid).map(([,n])=>n).filter(Boolean);
-  const th=el.querySelector('#turmaHoje');
-  if(!Object.keys(hoje).length){
-    th.textContent='Ninguém estudou ainda hoje. Seja o primeiro! 🌱';
-  } else {
-    const extra=nomes.length>4?' e mais '+(nomes.length-4):'';
-    th.innerHTML=`<span class="dotg"></span><b>${Object.keys(hoje).length}</b> pessoa(s) fizeram o devocional hoje`+
-      (nomes.length?`<br><span style="color:var(--ink-soft);font-size:12px">${nomes.slice(0,4).join(', ')}${extra}</span>`:'');
-  }
-
-  // feed de atividade
-  const fl=el.querySelector('#feedList');
-  const recent=flatComments().sort((a,b)=>b.ts-a.ts).slice(0,4);
-  if(!recent.length){
-    fl.innerHTML='<div style="font-size:12.5px;color:var(--ink-soft)">Os comentários da turma aparecerão aqui.</div>';
-  } else recent.forEach(cm=>{
-    const it=document.createElement('div'); it.className='feeditem';
-    it.innerHTML=`<span class="fw"><b></b> comentou Jz ${cm.c}:${cm.v===0?'(pergunta)':cm.v}</span><span class="ft">${timeAgo(cm.ts)}</span>`;
-    it.querySelector('b').textContent=firstName(cm.author);
-    it.onclick=()=>{ showView('read'); goTo(cm.c,Math.max(cm.v,1)); };
-    fl.appendChild(it);
+  el.querySelector('#dailyBtn').onclick=()=>dailyFlow(d);
+  // sinal social: quem estudou hoje + últimas da turma
+  const flat=flatComments().sort((a,b)=>b.ts-a.ts);
+  const t0=new Date(); t0.setHours(0,0,0,0);
+  const hoje=new Set(flat.filter(cm=>cm.ts>=t0.getTime()).map(cm=>cm.uid));
+  const socLine=el.querySelector('#socLine');
+  if(hoje.size===0) socLine.textContent='Ninguém comentou hoje ainda. Seja o primeiro! 🌱';
+  else if(hoje.size===1 && hoje.has(user.uid)) socLine.textContent='🟢 Você já marcou presença hoje. Chame a turma!';
+  else socLine.textContent='🟢 '+hoje.size+' pessoa'+(hoje.size>1?'s':'')+' estudando hoje';
+  const feed=el.querySelector('#socFeed');
+  flat.slice(0,3).forEach(cm=>{
+    const it=document.createElement('div'); it.className='fitem';
+    it.setAttribute('role','button'); it.setAttribute('tabindex','0');
+    const ref=document.createElement('span'); ref.className='fref';
+    ref.textContent=cm.v===0?cm.c+':P':cm.c+':'+cm.v;
+    const tx=document.createElement('span'); tx.className='ftx';
+    const bo=document.createElement('b'); bo.textContent=(cm.author||'Alguém')+': ';
+    tx.appendChild(bo);
+    tx.append(cm.text.length>90?cm.text.slice(0,90)+'…':cm.text);
+    const wh=document.createElement('span'); wh.className='fwhen'; wh.textContent=fmtWhen(cm.ts);
+    it.append(ref,tx,wh);
+    const go=()=>goTo(cm.c,Math.max(cm.v,1));
+    it.onclick=go;
+    it.addEventListener('keydown',e=>{ if(e.key==='Enter'){e.preventDefault();go();} });
+    feed.appendChild(it);
   });
+  if(!flat.length){ const e2=document.createElement('div'); e2.className='mhint'; e2.textContent='Os comentários da turma aparecerão aqui.'; feed.appendChild(e2); }
+  el.querySelector('#votdGo').onclick=()=>{ showView('read'); goTo(d.c,d.v); };
+  el.querySelector('#votdCard').onclick=()=>makeCard(d.c,d.v,d.text);
   const chips=el.querySelector('#wkChips');
   p.chapters.forEach(c=>{
     const b=document.createElement('button');
@@ -1176,7 +1176,7 @@ onAuthStateChanged(auth,u=>{
     $('app').classList.add('hidden');
     $('landing').classList.remove('hidden');
     subs.forEach(f=>f()); subs=[];
-    all={}; likes={}; favs=new Map(); perguntas={}; denuncias=[]; dev={}; mem={}; follow=false; pres={}; presMine=new Set();
+    all={}; likes={}; favs=new Map(); perguntas={}; denuncias=[]; dev={}; mem={}; diario={}; follow=false;
   }
 });
 function firstName(s){ return (s||'').trim().split(/\s+/)[0]||'?'; }
@@ -1218,6 +1218,7 @@ function startListeners(){
     });
     for(const k in all) all[k].sort((a,b)=>a.ts-b.ts);
     renderAll(true);
+    if(view==='home') renderHome();
   },err=>{ console.error(err); toast('Erro ao carregar comentários. Verifique as regras do Firestore.'); }));
 
   subs.push(onSnapshot(query(LIKES,where('b','==','jz')),snap=>{
@@ -1238,10 +1239,9 @@ function startListeners(){
     renderAll(true);
   },err=>console.error(err)));
 
-  subs.push(onSnapshot(query(PRES,where('b','==','jz')),snap=>{
-    pres={};
-    snap.forEach(d0=>{ const x=d0.data(); (pres[x.day]=pres[x.day]||{})[x.uid]=x.name||''; });
-    presMine=new Set(Object.keys(pres).filter(dy=>pres[dy][user.uid]!==undefined));
+  subs.push(onSnapshot(query(DIARIO,where('b','==','jz'),where('uid','==',user.uid)),snap=>{
+    diario={};
+    snap.forEach(d=>{ const x=d.data(); diario[x.day]={med:x.med||'',ora:x.ora||''}; });
     if(view==='home') renderHome();
   },err=>console.error(err)));
 
@@ -1775,21 +1775,27 @@ function chapCounts(c){
 }
 function allCount(){ let n=0; for(const k in all)n+=all[k].length; return n; }
 
+function chapDone(c){
+  const mine=userStats()[user.uid];
+  const commented=mine&&mine.perChap&&mine.perChap[c]&&mine.perChap[c].size>0;
+  const devoc=dev[c]&&((dev[c].med&&dev[c].med.trim())||(dev[c].ora&&dev[c].ora.trim()));
+  return !!(commented||devoc);
+}
 function renderSidebar(){
   const grid=$('chapGrid'); grid.innerHTML='';
   const wk=PLAN[currentWeek()].chapters;
-  const mineChap=((userStats()[user.uid]||{}).perChap)||{};
   BOOK.chapters.forEach((ch,i)=>{
     const c=i+1,{versesWith}=chapCounts(c);
-    const done=mineChap[c]&&mineChap[c].size>0;
     const b=document.createElement('button');
-    b.className='chap-btn'+(c===cur?' active':'')+(versesWith>0?' has':'')+(wk.includes(c)?' week':'')+(done?' done':'');
-    if(done) b.title='Você já comentou neste capítulo';
+    b.className='chap-btn'+(c===cur?' active':'')+(versesWith>0?' has':'')+(wk.includes(c)?' week':'')+(chapDone(c)?' done':'');
     b.innerHTML=`<span class="n">${c}</span><span class="c">${versesWith}/${ch.length}</span>`;
     b.onclick=()=>{ cur=c; showView('read'); };
     grid.appendChild(b);
   });
   $('overall').innerHTML=`<b>${allCount()}</b> comentários da turma`;
+  let done=0; for(let c=1;c<=21;c++) if(chapDone(c)) done++;
+  $('trailN').textContent=done;
+  $('trailBar').style.width=(done/21*100).toFixed(0)+'%';
 }
 
 function commentBox(cm,rerender,c,v,isReply){
@@ -1891,13 +1897,11 @@ function buildThread(container,vkey,c,v,placeholder){
       chips.appendChild(b);
     });
     comp.appendChild(chips);
-    const st2=document.createElement('div'); st2.className='chips';
-    [['💭 Chamou minha atenção','Este versículo me chamou atenção porque '],
-     ['❓ Tenho uma dúvida','Fiquei com uma dúvida: '],
-     ['🔗 Me lembra algo','Isso me lembra '],
-     ['❤️ Falou comigo','Senti que Deus falou comigo aqui: ']].forEach(([l,pfx])=>{
-      const b=document.createElement('button'); b.type='button'; b.textContent=l;
-      b.onclick=()=>{ ta.value+=(ta.value&&!ta.value.endsWith('\n')?'\n':'')+pfx; ta.focus(); };
+    const st2=document.createElement('div'); st2.className='starters';
+    ['Este versículo me chamou atenção porque… ','Não entendi… alguém me ajuda? ',
+     'Isso me lembra… ','Deus me mostrou que… '].forEach(ph=>{
+      const b=document.createElement('button'); b.type='button'; b.textContent='“'+ph.trim()+'”';
+      b.onclick=()=>{ ta.value = ta.value ? ta.value+'\n'+ph : ph; ta.focus(); };
       st2.appendChild(b);
     });
     comp.appendChild(st2);
@@ -2014,7 +2018,6 @@ function renderChapter(keepOpen){
             const sc=document.createElement('div'); sc.className='qscore';
             sc.textContent='Resultado: '+score+' de '+QZ.length+(score===QZ.length?' 🎉':'');
             qb.appendChild(sc);
-            if(score===QZ.length) celebrate('🏅','Quiz perfeito!','Você conhece bem Juízes '+cur+'.');
             try{
               const prev=parseInt(localStorage.getItem('jz_quiz_'+cur));
               if(isNaN(prev)||score>prev) localStorage.setItem('jz_quiz_'+cur,score);
