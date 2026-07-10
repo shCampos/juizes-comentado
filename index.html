@@ -3,18 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#3E4A31">
 <title>Juízes comentado por você</title>
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+try{ if(localStorage.getItem('jz_theme')==='dark') document.documentElement.dataset.theme='dark'; }catch(e){}
+</script>
 <style>
 :root{
-  --paper:#FBFAF6; --ink:#2B2E26; --ink-soft:#5B5F52;
+  --paper:#FBFAF6; --card:#FFFFFF; --ink:#2B2E26; --ink-soft:#5B5F52;
   --moss:#5C6B47; --moss-deep:#3E4A31; --moss-wash:#EEF0E6;
   --sand:#E8E2D2; --sand-soft:#F3F0E7; --bronze:#9C7A3C;
   --bronze-wash:#F5EEDD; --line:#DDD8C8; --err:#9B3B2E;
   --display:'Fraunces', Georgia, 'Times New Roman', serif;
   --serif:'Source Serif 4', Georgia, serif;
   --sans:'Inter', -apple-system, 'Segoe UI', sans-serif;
+}
+[data-theme="dark"]{
+  --paper:#1C1F17; --card:#262A20; --ink:#E9E7DB; --ink-soft:#A9AD9A;
+  --moss:#8FA070; --moss-deep:#ADBE8C; --moss-wash:#222619;
+  --sand:#3A3E30; --sand-soft:#2A2E23; --bronze:#C79E58;
+  --bronze-wash:#33301F; --line:#3C4032; --err:#D07260;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
@@ -37,14 +49,13 @@ a{color:var(--moss-deep)}
 .hero .sobre h2,.hero .contato h2{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--moss-deep);font-weight:600;margin-bottom:8px}
 .hero .sobre p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);max-width:52ch;margin-bottom:10px}
 .hero .contato{margin-top:20px}
-.hero .contato a{display:inline-block;font-size:14px;font-weight:500;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;text-decoration:none}
+.hero .contato a{display:inline-block;font-size:14px;font-weight:500;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 16px;text-decoration:none}
 .hero .contato a:hover{border-color:var(--moss);background:var(--moss-wash)}
-
-.auth-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 22px 22px;box-shadow:0 2px 14px rgba(43,46,38,.05);position:sticky;top:32px}
+.auth-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 22px 22px;box-shadow:0 2px 14px rgba(0,0,0,.06);position:sticky;top:32px}
 @media (max-width:820px){.auth-card{position:static;order:-1}}
 .tabs{display:flex;gap:6px;background:var(--sand-soft);border-radius:9px;padding:4px;margin-bottom:18px}
 .tabs button{flex:1;border:none;background:none;border-radius:7px;padding:10px 6px;font-size:14px;font-weight:600;color:var(--ink-soft)}
-.tabs button.on{background:#fff;color:var(--moss-deep);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.tabs button.on{background:var(--card);color:var(--moss-deep);box-shadow:0 1px 3px rgba(0,0,0,.1)}
 .field{margin-bottom:13px}
 .field label{display:block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px}
 .field input{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--paper);padding:12px;font-size:16px;font-family:var(--sans);color:var(--ink)}
@@ -52,20 +63,20 @@ a{color:var(--moss-deep)}
 .auth-msg{font-size:13px;min-height:18px;margin:2px 0 10px}
 .auth-msg.err{color:var(--err)}
 .auth-msg.ok{color:var(--moss)}
-.btn{border:1px solid var(--moss-deep);background:#fff;color:var(--moss-deep);border-radius:8px;padding:9px 14px;font-size:13.5px;font-weight:500;min-height:38px}
+.btn{border:1px solid var(--moss-deep);background:var(--card);color:var(--moss-deep);border-radius:8px;padding:9px 14px;font-size:13.5px;font-weight:500;min-height:38px}
 .btn:hover{background:var(--moss-wash)}
-.btn.primary{background:var(--moss-deep);color:#fff;border-color:var(--moss-deep)}
+.btn.primary{background:var(--moss-deep);color:var(--paper);border-color:var(--moss-deep)}
+[data-theme="dark"] .btn.primary{color:#1C1F17}
 .btn.primary:hover{background:var(--moss)}
 .btn.wide{width:100%;padding:12px}
 .btn:disabled{opacity:.5;cursor:default}
+.btn.icon{min-width:38px;padding:8px 10px;font-size:15px}
 .forgot{display:block;text-align:center;font-size:12.5px;margin-top:12px;color:var(--ink-soft)}
 .auth-note{font-size:11.5px;color:var(--ink-soft);margin-top:14px;line-height:1.5;border-top:1px solid var(--line);padding-top:12px}
 .landing-foot{text-align:center;font-size:12px;color:var(--ink-soft);padding:16px}
-
 .setup-warn{max-width:680px;margin:60px auto;background:var(--bronze-wash);border:1px solid var(--bronze);border-radius:12px;padding:24px 26px;font-size:14.5px;line-height:1.7}
 .setup-warn h2{font-family:var(--display);color:var(--moss-deep);margin-bottom:10px}
-.setup-warn code{background:#fff;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:13px}
-.setup-warn ol{margin:10px 0 0 20px}
+.setup-warn code{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:13px}
 
 /* ========== APP ========== */
 .app{display:grid;grid-template-columns:264px 1fr;height:100vh;height:100dvh}
@@ -74,77 +85,97 @@ a{color:var(--moss-deep)}
 .brand .eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--moss-deep);font-weight:600;margin-bottom:5px}
 .brand h1{font-family:var(--display);font-weight:700;font-size:22px;line-height:1.2}
 .me{padding:11px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
-.me .avatar{width:34px;height:34px;border-radius:50%;background:var(--moss-deep);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;flex-shrink:0}
+.me .avatar{width:34px;height:34px;border-radius:50%;background:var(--moss-deep);color:var(--paper);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;flex-shrink:0}
+[data-theme="dark"] .me .avatar{color:#1C1F17}
 .me .who{font-size:13px;font-weight:600;line-height:1.25;word-break:break-word}
 .me .who small{display:block;font-weight:400;font-size:11px;color:var(--ink-soft)}
 .me .out{margin-left:auto;border:none;background:none;font-size:11.5px;color:var(--ink-soft);text-decoration:underline;padding:6px 0 6px 6px}
 .me .out:hover{color:var(--ink)}
+.plan{padding:11px 20px;border-bottom:1px solid var(--line);background:var(--bronze-wash)}
+.plan .wk{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);font-weight:600}
+.plan .what{font-size:13px;font-weight:600;margin:2px 0 6px}
+.plan button{font-size:12px;border:none;background:none;color:var(--moss-deep);text-decoration:underline;padding:0}
 .progress-all{padding:12px 20px;border-bottom:1px solid var(--line);font-size:12px;color:var(--ink-soft)}
 .progress-all b{color:var(--moss-deep)}
 .chap-label{padding:14px 20px 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
 .chap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:4px 16px 20px}
-.chap-btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 4px 6px;text-align:center;color:var(--ink);min-height:44px}
+.chap-btn{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px 4px 6px;text-align:center;color:var(--ink);min-height:44px;position:relative}
 .chap-btn .n{font-family:var(--display);font-size:17px;font-weight:600;display:block}
 .chap-btn .c{font-size:10px;color:var(--ink-soft);display:block;margin-top:1px}
 .chap-btn.has .c{color:var(--bronze);font-weight:600}
+.chap-btn.week::after{content:'●';position:absolute;top:2px;right:5px;font-size:8px;color:var(--bronze)}
 .chap-btn:hover{border-color:var(--moss)}
 .chap-btn.active{background:var(--moss-deep);border-color:var(--moss-deep)}
-.chap-btn.active .n{color:#fff}
+.chap-btn.active .n{color:var(--paper)}
 .chap-btn.active .c{color:var(--sand)}
+[data-theme="dark"] .chap-btn.active .n{color:#1C1F17}
 .side-foot{margin-top:auto;padding:14px 20px 18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-soft)}
 
 .main{overflow-y:auto;display:flex;flex-direction:column;-webkit-overflow-scrolling:touch}
-.topbar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:12px 32px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.topbar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:12px 32px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .topbar h2{font-family:var(--display);font-size:21px;font-weight:600;color:var(--moss-deep)}
 .topbar .stat{font-size:12px;color:var(--ink-soft)}
 .topbar .spacer{flex:1}
 select.btn{padding:8px}
-.live{font-size:11.5px;color:var(--moss);display:flex;align-items:center;gap:5px}
-.live::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--moss);display:inline-block}
-
 .verses{max-width:840px;width:100%;margin:0 auto;padding:20px 32px 90px}
 
-/* pregações por capítulo */
-.sermons{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:18px;overflow:hidden}
-.sermons summary{list-style:none;cursor:pointer;padding:13px 16px;font-weight:600;font-size:13.5px;color:var(--moss-deep);display:flex;align-items:center;gap:8px}
-.sermons summary::-webkit-details-marker{display:none}
-.sermons summary::before{content:'▸';color:var(--bronze);transition:transform .15s}
-.sermons[open] summary::before{transform:rotate(90deg)}
-@media (prefers-reduced-motion:reduce){.sermons summary::before{transition:none}}
-.sermons .body{padding:0 16px 14px}
-.sermons .note{font-size:11.5px;color:var(--ink-soft);margin-bottom:9px}
-.sermons .links{display:flex;gap:8px;flex-wrap:wrap}
-.sermons .links a{font-size:12.5px;text-decoration:none;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:7px 13px;color:var(--moss-deep)}
-.sermons .links a:hover{border-color:var(--moss);background:var(--moss-wash)}
-.sermons .links a::before{content:'▶ ';color:var(--err);font-size:10px}
+/* cards de capítulo */
+.ccard{background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:14px;overflow:hidden}
+.ccard summary{list-style:none;cursor:pointer;padding:13px 16px;font-weight:600;font-size:13.5px;color:var(--moss-deep);display:flex;align-items:center;gap:8px}
+.ccard summary::-webkit-details-marker{display:none}
+.ccard summary::before{content:'▸';color:var(--bronze);transition:transform .15s}
+.ccard[open] summary::before{transform:rotate(90deg)}
+@media (prefers-reduced-motion:reduce){.ccard summary::before{transition:none}}
+.ccard .body{padding:0 16px 14px}
+.ccard .note{font-size:11.5px;color:var(--ink-soft);margin-bottom:9px}
+.ccard .links{display:flex;gap:8px;flex-wrap:wrap}
+.ccard .links a{font-size:12.5px;text-decoration:none;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:7px 13px;color:var(--moss-deep)}
+.ccard .links a:hover{border-color:var(--moss);background:var(--moss-wash)}
+.ccard .links a.yt::before{content:'▶ ';color:var(--err);font-size:10px}
+.gloss-item{border-top:1px solid var(--line);padding:9px 0}
+.gloss-item:first-of-type{border-top:none}
+.gloss-item .term{font-family:var(--display);font-weight:600;font-size:15px;color:var(--bronze)}
+.gloss-item .def{font-size:13px;color:var(--ink-soft);line-height:1.55;margin-top:2px}
+
+/* pergunta do professor */
+.qcard{background:var(--bronze-wash);border:1px solid var(--bronze);border-radius:10px;margin-bottom:14px;padding:14px 16px}
+.qcard .tag{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);font-weight:600;display:flex;align-items:center;gap:8px}
+.qcard .tag button{margin-left:auto;border:none;background:none;font-size:11.5px;color:var(--ink-soft);text-decoration:underline}
+.qcard .qtext{font-family:var(--serif);font-size:16px;line-height:1.55;margin:6px 0 10px}
+.qcard .qthread{margin-top:4px}
 
 .verse{border-bottom:1px solid var(--line);padding:14px 0}
 .verse-row{display:flex;gap:14px;align-items:baseline;cursor:pointer;border-radius:6px}
 .vnum{font-family:var(--display);font-weight:600;font-size:15px;color:var(--ink-soft);min-width:34px;text-align:right;flex-shrink:0}
-.vtext{font-family:var(--serif);font-size:17.5px;line-height:1.65}
+.vtext{font-family:var(--serif);font-size:var(--vsize,17.5px);line-height:1.7}
 .verse-row:hover .vtext{color:var(--moss-deep)}
-.badge{flex-shrink:0;align-self:center;font-size:11px;font-weight:600;color:#fff;background:var(--bronze);border-radius:999px;padding:2px 8px;margin-left:auto}
+.verse.fav .vtext{background:linear-gradient(transparent 55%, var(--bronze-wash) 55%)}
+.verse.fav .vnum::after{content:' ★';color:var(--bronze);font-size:11px}
+.badge{flex-shrink:0;align-self:center;font-size:11px;font-weight:600;color:var(--paper);background:var(--bronze);border-radius:999px;padding:2px 8px;margin-left:auto}
+[data-theme="dark"] .badge{color:#1C1F17}
 .panel{display:none;margin:12px 0 4px 48px}
 .verse.open .panel{display:block}
 
-.comment{background:#fff;border:1px solid var(--line);border-left:3px solid var(--moss);border-radius:6px;padding:10px 13px;margin-bottom:8px}
+.comment{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--moss);border-radius:6px;padding:10px 13px;margin-bottom:8px}
 .comment.mine{border-left-color:var(--bronze);background:var(--bronze-wash)}
 .comment.reply{margin-left:26px;border-left-color:var(--sand)}
 .comment.reply.mine{border-left-color:var(--bronze)}
 .comment .head{display:flex;gap:8px;align-items:baseline;margin-bottom:3px;flex-wrap:wrap}
 .comment .who{font-weight:600;font-size:13px;color:var(--moss-deep)}
 .comment.mine .who{color:var(--bronze)}
+.prof-badge{font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--bronze);color:var(--paper);border-radius:4px;padding:1.5px 6px}
+[data-theme="dark"] .prof-badge{color:#1C1F17}
 .comment .when{font-size:11px;color:var(--ink-soft)}
 .comment .body{font-family:var(--serif);font-size:14.5px;line-height:1.6;white-space:pre-wrap}
 .comment .acts{margin-left:auto;display:flex;gap:8px}
 .comment .acts button{border:none;background:none;font-size:11.5px;color:var(--ink-soft);text-decoration:underline;padding:4px 0}
 .comment .acts button:hover{color:var(--ink)}
-.cfoot{display:flex;gap:14px;margin-top:7px;align-items:center}
+.cfoot{display:flex;gap:14px;margin-top:7px;align-items:center;flex-wrap:wrap}
 .cfoot button{border:none;background:none;font-size:12px;color:var(--ink-soft);padding:4px 0;display:flex;align-items:center;gap:4px}
 .cfoot button:hover{color:var(--moss-deep)}
 .cfoot .amem.on{color:var(--bronze);font-weight:600}
 
-.composer textarea{width:100%;min-height:76px;resize:vertical;font-family:var(--serif);font-size:16px;line-height:1.6;color:var(--ink);background:#fff;border:1px solid var(--sand);border-left:3px solid var(--bronze);border-radius:6px;padding:11px 13px}
+.composer textarea{width:100%;min-height:76px;resize:vertical;font-family:var(--serif);font-size:16px;line-height:1.6;color:var(--ink);background:var(--card);border:1px solid var(--sand);border-left:3px solid var(--bronze);border-radius:6px;padding:11px 13px}
 .composer textarea::placeholder{color:#B0A583}
 .composer textarea:focus{outline:none;border-color:var(--bronze)}
 .composer .foot{display:flex;gap:10px;align-items:center;margin-top:7px;flex-wrap:wrap}
@@ -154,84 +185,216 @@ select.btn{padding:8px}
 
 .refs{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
 .refs .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin-right:2px;width:100%}
-.refs a{font-size:12px;color:var(--moss-deep);text-decoration:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px}
-.refs a:hover{border-color:var(--moss);background:var(--moss-wash)}
+.refs a,.refs button.chip{font-size:12px;color:var(--moss-deep);text-decoration:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px}
+.refs a:hover,.refs button.chip:hover{border-color:var(--moss);background:var(--moss-wash)}
 .refs a.en{border-style:dashed}
+.refs button.chip.on{border-color:var(--bronze);color:var(--bronze);font-weight:600}
 
 .chap-nav{display:flex;justify-content:space-between;max-width:840px;margin:0 auto;padding:0 32px 40px;width:100%}
-.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:13px;padding:9px 16px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:20;max-width:92vw;text-align:center}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);font-size:13px;padding:9px 16px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:40;max-width:92vw;text-align:center}
 .toast.show{opacity:1}
 @media (prefers-reduced-motion:reduce){.toast{transition:none}}
+
+/* ========== MODAL ========== */
+.overlay{position:fixed;inset:0;background:rgba(20,22,16,.5);z-index:30;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal{background:var(--paper);border:1px solid var(--line);border-radius:14px;max-width:640px;width:100%;max-height:86vh;display:flex;flex-direction:column;overflow:hidden}
+.modal .mhead{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.modal .mhead h3{font-family:var(--display);font-size:19px;color:var(--moss-deep);flex:1}
+.modal .mhead button{border:none;background:none;font-size:20px;color:var(--ink-soft);padding:4px 8px}
+.modal .mbody{padding:16px 20px;overflow-y:auto}
+@media (max-width:640px){
+  .overlay{align-items:flex-end;padding:0}
+  .modal{border-radius:14px 14px 0 0;max-height:88vh}
+}
+.mlist{list-style:none}
+.mlist li{border-bottom:1px solid var(--line);padding:10px 2px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.mlist li:last-child{border-bottom:none}
+.mlist .ref{font-family:var(--display);font-weight:600;color:var(--bronze);min-width:52px}
+.mlist .txt{flex:1;font-family:var(--serif);font-size:14px;line-height:1.55}
+.mlist .go{border:none;background:none;color:var(--moss-deep);text-decoration:underline;font-size:12px;padding:0}
+.rank{list-style:none;counter-reset:pos}
+.rank li{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:10px 2px}
+.rank li::before{counter-increment:pos;content:counter(pos)"º";font-family:var(--display);font-weight:600;color:var(--bronze);min-width:30px}
+.rank .rname{font-weight:600;flex:1}
+.rank .rbadges{font-size:14px;letter-spacing:2px}
+.rank .rscore{font-size:12px;color:var(--ink-soft)}
+.mybadges{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
+.mybadge{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:12.5px;display:flex;gap:7px;align-items:center}
+.mybadge.off{opacity:.38;filter:grayscale(1)}
+.mybadge b{font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th{text-align:left;color:var(--ink-soft);font-weight:600;border-bottom:2px solid var(--line);padding:6px 6px}
+.tbl td{border-bottom:1px solid var(--line);padding:7px 6px}
+.searchbar{display:flex;gap:8px;margin-bottom:12px}
+.searchbar input{flex:1;border:1px solid var(--line);border-radius:8px;background:var(--card);padding:11px 12px;font-size:16px;color:var(--ink)}
+.searchbar input:focus{outline:none;border-color:var(--moss)}
+.mhint{font-size:12px;color:var(--ink-soft);margin-bottom:10px}
+.den{border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-bottom:9px;background:var(--card)}
+.den .dref{font-weight:600;color:var(--bronze);font-size:12.5px}
+.den .dtxt{font-family:var(--serif);font-size:13.5px;margin:4px 0 8px}
+.den .dacts{display:flex;gap:8px;flex-wrap:wrap}
+
+
+/* ========== NAVEGAÇÃO / VISTAS ========== */
+.view{animation:fadein .18s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.view{animation:none}}
+.nav{display:flex;gap:6px;padding:10px 16px;border-bottom:1px solid var(--line)}
+.nav button{flex:1;border:1px solid transparent;background:none;border-radius:8px;padding:8px 4px;font-size:12.5px;font-weight:600;color:var(--ink-soft)}
+.nav button.on{background:var(--card);border-color:var(--line);color:var(--moss-deep)}
+.nav button:hover{color:var(--moss-deep)}
+.bottomnav{display:none}
+
+/* ========== LÉXICO ========== */
+button.lex{border:none;background:none;padding:0;font:inherit;color:inherit;cursor:pointer;border-bottom:1.5px dotted var(--bronze)}
+button.lex:hover{color:var(--bronze)}
+.lexdef{font-family:var(--serif);font-size:15.5px;line-height:1.65;margin-bottom:14px}
+.lexlinks{display:flex;gap:8px;flex-wrap:wrap}
+.lexlinks a{font-size:12.5px;text-decoration:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 13px;color:var(--moss-deep)}
+.lexlinks a:hover{border-color:var(--moss);background:var(--moss-wash)}
+.lexhint{font-size:11px;color:var(--ink-soft);margin-top:12px}
+
+/* ========== INÍCIO ========== */
+.home{max-width:840px;width:100%;margin:0 auto;padding:26px 32px 90px}
+.home .hi{font-family:var(--display);font-size:30px;font-weight:700;color:var(--moss-deep);margin-bottom:2px}
+.home .hi .hl{font-style:italic}
+.home .sub{font-size:13.5px;color:var(--ink-soft);margin-bottom:20px}
+.hgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:700px){.hgrid{grid-template-columns:1fr}}
+.hcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.hcard.gold{background:var(--bronze-wash);border-color:var(--bronze)}
+.hcard .t{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);font-weight:600;margin-bottom:8px}
+.hcard .votd{font-family:var(--serif);font-size:17px;line-height:1.65;margin-bottom:6px}
+.hcard .ref{font-family:var(--display);font-weight:600;color:var(--moss-deep);margin-bottom:10px}
+.hcard .row{display:flex;gap:8px;flex-wrap:wrap}
+.hcard .big{font-family:var(--display);font-size:26px;font-weight:700;color:var(--moss-deep)}
+.hcard .lbl2{font-size:12px;color:var(--ink-soft)}
+.hstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(84px,1fr));gap:8px;text-align:center}
+@media (max-width:700px){.hstats{grid-template-columns:repeat(2,1fr)}}
+.shortcut{display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:12px 14px;font-size:13.5px;font-weight:600;color:var(--ink);width:100%;text-align:left}
+.shortcut:hover{border-color:var(--moss);background:var(--moss-wash)}
+.shortcut .ic{font-size:18px}
+.shortcut small{display:block;font-weight:400;color:var(--ink-soft);font-size:11.5px}
+.wkchips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 10px}
+.wkchips button{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;color:var(--moss-deep)}
+.wkchips button:hover{border-color:var(--moss)}
+.wkchips button b{color:var(--bronze)}
+
+/* ========== GUIA ========== */
+.guide{max-width:760px;width:100%;margin:0 auto;padding:26px 32px 90px}
+.guide h2{font-family:var(--display);font-size:28px;font-weight:700;color:var(--moss-deep);margin-bottom:6px}
+.guide .sub{font-size:13.5px;color:var(--ink-soft);margin-bottom:20px}
+.guide h3{font-family:var(--display);font-size:19px;color:var(--bronze);margin:22px 0 8px}
+.guide p{font-family:var(--serif);font-size:15.5px;line-height:1.75;margin-bottom:10px}
+.guide ul,.guide ol{margin:0 0 12px 20px;font-family:var(--serif);font-size:15px;line-height:1.7}
+.guide li{margin-bottom:5px}
+.gstep{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--bronze);border-radius:8px;padding:12px 14px;margin-bottom:10px}
+.gstep b{color:var(--moss-deep)}
+.gnote{background:var(--bronze-wash);border:1px solid var(--bronze);border-radius:8px;padding:12px 14px;font-size:13.5px;margin:14px 0}
+
+/* ========== DEVOCIONAL ========== */
+.ccard.devo{border-color:var(--bronze)}
+.devo .body label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);font-weight:600;margin:10px 0 5px}
+.devo textarea{width:100%;min-height:64px;resize:vertical;font-family:var(--serif);font-size:15px;line-height:1.6;color:var(--ink);background:var(--paper);border:1px solid var(--sand);border-radius:6px;padding:10px 12px}
+.devo textarea:focus{outline:none;border-color:var(--bronze)}
+.devo .dfoot{display:flex;gap:10px;align-items:center;margin-top:10px}
+.devo .dstate{font-size:11.5px;color:var(--ink-soft)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.chips button{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 11px;font-size:11.5px;font-weight:600;color:var(--moss-deep)}
+.chips button:hover{border-color:var(--bronze);color:var(--bronze)}
+
+/* ========== EXTRAS V5 ========== */
+.verse.speaking{background:var(--moss-wash);border-radius:8px}
+body.focus .ccard,body.focus .qcard,body.focus .badge,body.focus .chap-nav{display:none}
+body.focus .vtext{line-height:2;font-size:calc(var(--vsize,17.5px)*1.08)}
+body.focus .verse{border-bottom-color:transparent;padding:8px 0}
+.livebanner{max-width:840px;margin:12px auto 0;padding:10px 14px;background:var(--bronze-wash);border:1px solid var(--bronze);border-radius:10px;display:flex;gap:10px;align-items:center;font-size:13px;width:calc(100% - 40px)}
+.livebanner b{color:var(--bronze)}
+.quiz .qq{font-family:var(--serif);font-size:15px;font-weight:600;margin:12px 0 8px}
+.quiz .opts{display:flex;flex-direction:column;gap:6px}
+.quiz .opts button{text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:9px 12px;font-size:13.5px;color:var(--ink)}
+.quiz .opts button:hover{border-color:var(--moss)}
+.quiz .opts button.ok{border-color:var(--moss);background:var(--moss-wash);font-weight:600}
+.quiz .opts button.err{border-color:var(--err);color:var(--err)}
+.quiz .qscore{margin-top:12px;font-weight:600;color:var(--moss-deep)}
+.fcard{text-align:center;padding:10px 4px}
+.fcard .fref{font-family:var(--display);font-size:26px;font-weight:700;color:var(--bronze);margin-bottom:12px}
+.fcard .ftxt{font-family:var(--serif);font-size:17px;line-height:1.7;margin-bottom:16px;min-height:60px}
+.fcard .frow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.fcard .fmeta{font-size:11.5px;color:var(--ink-soft);margin-top:12px}
+.colorpick{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.colorpick button{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font-size:12.5px;font-weight:600;display:flex;gap:8px;align-items:center;color:var(--ink)}
+.colorpick button:hover{border-color:var(--moss)}
+.cdot{width:14px;height:14px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.12)}
+.ob-step{font-family:var(--serif);font-size:15.5px;line-height:1.7;margin-bottom:14px}
+.ob-step b{color:var(--bronze)}
 
 /* ========== MOBILE ========== */
 @media (max-width:860px){
   .app{display:flex;flex-direction:column}
   .side{flex-direction:column;border-right:none;border-bottom:1px solid var(--line);overflow:visible;flex-shrink:0}
-  .brand{padding:12px 16px 6px;border-bottom:none}
+  .brand{padding:12px 16px 4px;border-bottom:none}
   .brand .eyebrow{font-size:10px;margin-bottom:2px}
   .brand h1{font-size:17px}
-  .me{padding:6px 16px 8px;border-bottom:none}
+  .me{padding:5px 16px 6px;border-bottom:none}
   .me .avatar{width:28px;height:28px;font-size:12px}
   .me .who small{display:none}
+  .plan{padding:7px 16px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;border-bottom:none}
+  .plan .what{margin:0;font-size:12px}
   .progress-all{display:none}
   .chap-label{display:none}
-  .chap-grid{display:flex;overflow-x:auto;gap:6px;padding:2px 12px 10px;scrollbar-width:none}
+  .chap-grid{display:flex;overflow-x:auto;gap:6px;padding:6px 12px 10px;scrollbar-width:none}
   .chap-grid::-webkit-scrollbar{display:none}
   .chap-btn{flex:0 0 auto;min-width:54px;padding:6px 8px 5px}
   .side-foot{display:none}
   .main{flex:1}
-  .topbar{padding:10px 14px;gap:8px}
-  .topbar h2{font-size:18px}
+  .topbar{padding:10px 12px;gap:6px}
+  .topbar h2{font-size:17px}
   .topbar .stat{display:none}
-  .live{display:none}
-  .verses{padding:16px 14px 70px}
-  .vtext{font-size:16.5px}
+  .verses{padding:14px 14px 70px}
+  .vtext{font-size:calc(var(--vsize,17.5px)*0.94)}
   .vnum{min-width:26px}
   .verse-row{gap:10px}
   .panel{margin-left:8px}
   .comment.reply{margin-left:14px}
   .reply-box{margin-left:14px}
-  .chap-nav{padding:0 14px 46px}
-  .auth-card .field input{font-size:16px}
+  .chap-nav{padding:0 14px 66px}
+  .nav{display:none}
+  .home,.guide{padding:18px 16px 84px}
+  .verses{padding-bottom:84px}
+  .bottomnav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:15;background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom))}
+  .bottomnav button{flex:1;border:none;background:none;font-size:10.5px;font-weight:600;color:var(--ink-soft);display:flex;flex-direction:column;align-items:center;gap:2px;padding:5px 2px;border-radius:8px}
+  .bottomnav button .ic{font-size:19px}
+  .bottomnav button.on{color:var(--bronze)}
 }
 </style>
 </head>
 <body>
 
-<!-- ============ AVISO DE CONFIGURAÇÃO ============ -->
 <div id="setupWarn" class="setup-warn hidden">
   <h2>Firebase ainda não configurado</h2>
   <p>Abra o <code>index.html</code>, localize o bloco <code>FIREBASE_CONFIG</code> no início do
-  <code>&lt;script type="module"&gt;</code> e cole a configuração do seu projeto.</p>
-  <ol>
-    <li>Crie um projeto em <code>console.firebase.google.com</code></li>
-    <li>Ative <b>Authentication → E-mail/senha</b></li>
-    <li>Crie o <b>Firestore</b> e publique as regras do arquivo <code>firestore.rules</code></li>
-    <li>Registre um <b>app Web</b> e copie o <code>firebaseConfig</code> para este arquivo</li>
-  </ol>
-  <p style="margin-top:10px">Passo a passo completo no <code>README.md</code>.</p>
+  <code>&lt;script type="module"&gt;</code> e cole a configuração do seu projeto.
+  Passo a passo completo no <code>README.md</code>.</p>
 </div>
 
-<!-- ============ LANDING + AUTENTICAÇÃO ============ -->
+<!-- ============ LANDING ============ -->
 <div id="landing" class="landing hidden">
   <div class="landing-inner">
     <div class="hero">
       <div class="eyebrow">EBD Jovens · Livro de Juízes · Almeida</div>
       <h1>Juízes<br>comentado<br>por <span class="hl">você</span></h1>
       <p class="lead">Leia o livro de Juízes versículo por versículo, escreva seus comentários, responda os colegas e diga "amém" ao que edificar você.</p>
-
       <div class="sobre">
         <h2>Sobre</h2>
         <p>Este projeto nasceu na Escola Bíblica Dominical como um exercício de leitura atenta: em vez de receber o comentário pronto, cada aluno constrói o seu, versículo por versículo, e aprende com a observação dos demais.</p>
-        <p>O texto bíblico é a tradução João Ferreira de Almeida (domínio público). Cada versículo traz atalhos de estudo em português e ferramentas avançadas (interlinear hebraico e léxico), e cada capítulo recomenda pregações de pregadores renomados. Ao final, os comentários da turma podem ser exportados como material de estudo coletivo.</p>
+        <p>O texto bíblico é a tradução João Ferreira de Almeida (domínio público). Cada capítulo traz a pergunta do professor, plano de leitura semanal, glossário hebraico, pregações recomendadas e atalhos de estudo. Os comentários da turma podem ser exportados como material de estudo coletivo.</p>
       </div>
-
       <div class="contato">
         <h2>Contato</h2>
         <a href="mailto:shcampos2@gmail.com">✉ shcampos2@gmail.com</a>
       </div>
     </div>
-
     <div class="auth-card">
       <div class="tabs" role="tablist">
         <button id="tabLogin" class="on" role="tab">Entrar</button>
@@ -274,33 +437,64 @@ select.btn{padding:8px}
       <div class="who" id="whoName">…<small id="whoMail"></small></div>
       <button class="out" id="logout">sair</button>
     </div>
+    <div class="nav" id="sideNav">
+      <button data-view="home" class="on">🏠 Início</button>
+      <button data-view="read">📖 Ler</button>
+      <button data-view="guide">🧭 Como estudar</button>
+    </div>
+    <div class="plan">
+      <div class="wk" id="planWeek">Plano de leitura</div>
+      <div class="what" id="planWhat">…</div>
+      <button id="planGo">Ir para a leitura da semana</button>
+    </div>
     <div class="progress-all"><span id="overall"><b>0</b> comentários da turma</span></div>
     <div class="chap-label">Capítulos</div>
     <nav class="chap-grid" id="chapGrid" aria-label="Capítulos"></nav>
-    <div class="side-foot">✦ marca seus comentários. Cada pessoa edita apenas o que escreveu. Dúvidas: <a href="mailto:shcampos2@gmail.com">shcampos2@gmail.com</a></div>
+    <div class="side-foot">✦ marca seus comentários · ★ seus destaques. Dúvidas: <a href="mailto:shcampos2@gmail.com">shcampos2@gmail.com</a></div>
   </aside>
 
   <main class="main">
+    <div id="viewHome" class="view home"></div>
+    <div id="viewGuide" class="view guide hidden"></div>
+    <div id="viewRead" class="view hidden">
     <div class="topbar">
       <h2 id="chapTitle">Capítulo 1</h2>
       <span class="stat" id="chapStat"></span>
       <span class="spacer"></span>
-      <span class="live">ao vivo</span>
+      <button class="btn icon" id="btnSearch" title="Buscar" aria-label="Buscar">🔍</button>
+      <button class="btn icon" id="btnFavs" title="Meus destaques" aria-label="Meus destaques">★</button>
+      <button class="btn icon" id="btnRank" title="Turma e selos" aria-label="Turma e selos">🏆</button>
+      <button class="btn icon" id="fontMinus" title="Diminuir letra" aria-label="Diminuir letra">A-</button>
+      <button class="btn icon" id="fontPlus" title="Aumentar letra" aria-label="Aumentar letra">A+</button>
+      <button class="btn icon" id="btnAudio" title="Ouvir capítulo" aria-label="Ouvir capítulo">🔊</button>
+      <button class="btn icon" id="btnFocus" title="Modo foco" aria-label="Modo foco">👁</button>
+      <button class="btn icon" id="btnTheme" title="Alternar tema" aria-label="Alternar tema">🌙</button>
+      <button class="btn icon hidden" id="btnLive" title="Aula ao vivo" aria-label="Aula ao vivo">📡</button>
+      <button class="btn icon hidden" id="btnProf" title="Painel do professor" aria-label="Painel do professor">📋</button>
       <select class="btn" id="exportScope" aria-label="Escopo da exportação">
         <option value="commented">Só comentados</option>
         <option value="full">Livro completo</option>
       </select>
-      <button class="btn" id="exportMd">Markdown</button>
+      <button class="btn" id="exportMd">MD</button>
       <button class="btn primary" id="exportDoc">Word</button>
     </div>
+    <div class="livebanner hidden" id="liveBanner"></div>
     <div class="verses" id="verses"></div>
     <div class="chap-nav">
       <button class="btn" id="prevChap">← Anterior</button>
       <button class="btn" id="nextChap">Próximo →</button>
     </div>
+    </div>
+    <nav class="bottomnav" id="bottomNav">
+      <button data-view="home" class="on"><span class="ic">🏠</span>Início</button>
+      <button data-view="read"><span class="ic">📖</span>Ler</button>
+      <button data-view="guide"><span class="ic">🧭</span>Guia</button>
+      <button id="bnTurma"><span class="ic">🏆</span>Turma</button>
+    </nav>
   </main>
 </div>
 <div class="toast" id="toast"></div>
+<div id="modalRoot"></div>
 
 <script type="module">
 /* =====================================================================
@@ -315,6 +509,119 @@ const FIREBASE_CONFIG = {
   appId: "1:718734424599:web:f1beaff6e8181f411eba52"
 };
 const ADMIN_EMAIL = "shcampos2@gmail.com";
+
+/* Plano de leitura do trimestre: edite datas e semanas à vontade */
+const PLAN_START = "2026-07-05";  // domingo da 1ª semana
+const PLAN = [
+  {label:"Panorama e o ciclo de Juízes", chapters:[1,2]},
+  {label:"Otniel, Eúde e Sangar",        chapters:[3]},
+  {label:"Débora e Baraque",             chapters:[4,5]},
+  {label:"O chamado de Gideão",          chapters:[6]},
+  {label:"A vitória e a queda de Gideão",chapters:[7,8]},
+  {label:"Abimeleque",                   chapters:[9]},
+  {label:"Jefté",                        chapters:[10,11]},
+  {label:"Chibolete e os juízes menores",chapters:[12]},
+  {label:"O nascimento de Sansão",       chapters:[13]},
+  {label:"Sansão contra os filisteus",   chapters:[14,15]},
+  {label:"Sansão e Dalila",              chapters:[16]},
+  {label:"Os ídolos de Mica",            chapters:[17,18]},
+  {label:"A crise final de Israel",      chapters:[19,20,21]}
+];
+
+/* Glossário hebraico por capítulo (transliterações aproximadas) */
+const GLOSSARY = {
+  1:[["ḥerem","'Anátema', destruição consagrada ao SENHOR: pano de fundo da ordem de expulsar os cananeus, cumprida apenas em parte no capítulo."],
+     ["kena'ani","'Cananeu': os povos da terra cuja permanência se torna o estopim de toda a crise do livro."]],
+  2:[["mal'akh YHWH","'Anjo do SENHOR': mensageiro divino que sobe de Gilgal a Boquim e confronta a infidelidade de Israel."],
+     ["ba'al / 'ashtarot","Divindades cananeias da fertilidade; servir a elas é o pecado-modelo que abre o ciclo dos juízes."]],
+  3:[["shofet","'Juiz': não um magistrado, mas um líder-libertador levantado por Deus."],
+     ["yasha","Raiz de 'salvar/libertar', de onde vem 'moshia' (libertador), título dos juízes."]],
+  4:[["nevi'ah","'Profetisa': o título de Débora, que julgava Israel debaixo da palmeira."],
+     ["baraq","'Relâmpago': o nome de Baraque, ironicamente hesitante diante da ordem divina."]],
+  5:[["shirah","'Cântico': o poema de vitória de Débora e Baraque, um dos textos mais antigos da Bíblia."],
+     ["tsidqot YHWH","'Os atos justos do SENHOR' (5.11): a vitória é narrada como justiça de Deus, não façanha humana."]],
+  6:[["YHWH shalom","'O SENHOR é paz': nome do altar de Gideão em Ofra (6.24)."],
+     ["yerubba'al","'Que Baal contenda (por si)': apelido de Gideão após derrubar o altar pagão."]],
+  7:[["shofar","Trombeta de chifre de carneiro: arma paradoxal dos 300 de Gideão."],
+     ["lappidim","'Tochas' escondidas nos cântaros: a vitória vem por estratégia divina, não por força."]],
+  8:[["'efod","Objeto sacerdotal que Gideão fabrica com o ouro do despojo e que se torna laço de idolatria (8.27)."],
+     ["melekh","'Rei': Gideão recusa a coroa ('o SENHOR vos dominará'), tema que prepara os capítulos finais."]],
+  9:[["'atad","'Espinheiro': na parábola de Jotão, a árvore inútil e perigosa que aceita reinar, figura de Abimeleque."],
+     ["ba'al-berit","'Senhor da aliança': divindade de Siquém cujo templo financia o golpe de Abimeleque (9.4)."]],
+  10:[["'elohei hannekhar","'Deuses estrangeiros' que Israel remove no arrependimento (10.16)."],
+      ["qatsar nefesh","Expressão de 10.16: a 'alma' do SENHOR 'se angustiou' pela miséria de Israel."]],
+  11:[["neder","'Voto': a promessa precipitada de Jefté, centro trágico do capítulo (11.30-31)."],
+      ["yiftaḥ","'Ele abre': o nome de Jefté, o rejeitado a quem Deus abre caminho para liderar."]],
+  12:[["shibbolet","'Espiga/torrente': a palavra-teste que denunciava a pronúncia efraimita nos vaus do Jordão (12.6)."],
+      ["ma'barot hayyarden","'Vaus do Jordão': os pontos de travessia onde se decidiu o conflito civil."]],
+  13:[["nazir","'Nazireu', o separado: o voto que define Sansão desde o ventre (13.5)."],
+      ["pele'","'Maravilhoso/inefável': a resposta do Anjo sobre seu próprio nome (13.18)."]],
+  14:[["ḥidah","'Enigma': a charada do leão e do mel, estopim do conflito com os filisteus (14.12)."],
+      ["ruaḥ YHWH","'O Espírito do SENHOR', que investe sobre Sansão dando força extraordinária."]],
+  15:[["leḥi","'Queixada': a arma improvisada e o nome do lugar, Ramate-Leí (15.17)."],
+      ["'en-haqqore","'Fonte do que clama': Deus responde à sede do libertador exausto (15.19)."]],
+  16:[["dagon","Divindade filisteia; a festa a Dagom vira o palco do ato final de Sansão (16.23)."],
+      ["nezer","'Consagração': o cabelo não era mágico, era o sinal visível do voto; cortá-lo foi romper a consagração."]],
+  17:[["pesel umassekhah","'Imagem esculpida e de fundição': a religiosidade caseira e idólatra de Mica (17.3-4)."],
+      ["kohen","'Sacerdote': Mica contrata um levita particular, religião como conveniência."]],
+  18:[["dan","A tribo em migração que rouba os ídolos e o sacerdote de Mica: religião pela força e pela conveniência."],
+      ["layish","Cidade 'quieta e confiada' destruída pelos danitas (18.7,27), retrato da violência do período."]],
+  19:[["pilegesh","'Concubina': a mulher do levita, cuja tragédia expõe o abismo moral de Israel (19.1)."],
+      ["nevalah","'Loucura/infâmia': o termo para o crime de Gibeá (19.23-24), eco de Sodoma."]],
+  20:[["ke'ish 'eḥad","'Como um só homem' (20.1): a única unidade nacional do livro acontece para uma guerra civil."],
+      ["binyamin","'Filho da direita': a tribo que protege os culpados e é quase exterminada."]],
+  21:[["shevu'ah","'Juramento' feito em Mizpá, que gera o dilema das esposas para Benjamim."],
+      ["hayyashar be'enav","'O reto aos seus próprios olhos' (21.25): o veredito final sobre uma geração sem rei e sem Rei."]]
+};
+
+/* Léxico clicável: palavra do texto -> significado + fontes visuais */
+const LEXICON = {"otniel": {"t": "Otniel", "d": "Primeiro juiz de Israel, sobrinho de Calebe; libertou Israel de Cusã-Risataim (Jz 3)."}, "eude": {"t": "Eúde", "d": "Juiz benjamita canhoto que matou Eglom, rei de Moabe, com uma espada escondida (Jz 3)."}, "sangar": {"t": "Sangar", "d": "Juiz que feriu 600 filisteus com uma aguilhada de bois (Jz 3.31)."}, "debora": {"t": "Débora", "d": "Profetisa e juíza que julgava Israel debaixo de uma palmeira e convocou Baraque contra Sísera (Jz 4–5)."}, "baraque": {"t": "Baraque", "d": "Comandante de Naftali e Zebulom; venceu Sísera ao lado de Débora. O nome significa 'relâmpago'."}, "sisera": {"t": "Sísera", "d": "General do exército de Jabim, rei de Hazor; comandava 900 carros de ferro e foi morto por Jael."}, "jael": {"t": "Jael", "d": "Mulher de Héber, o queneu; matou Sísera com uma estaca de tenda (Jz 4.21)."}, "heber": {"t": "Héber", "d": "Queneu (descendente do sogro de Moisés) que acampava perto de Quedes; marido de Jael."}, "gideao": {"t": "Gideão", "d": "Juiz chamado por Deus em Ofra; venceu Midiã com 300 homens. Também chamado Jerubaal (Jz 6–8)."}, "jerubaal": {"t": "Jerubaal", "d": "Apelido de Gideão após destruir o altar de Baal: 'que Baal contenda por si' (Jz 6.32)."}, "joas": {"t": "Joás", "d": "Pai de Gideão, abiezrita de Ofra, dono do altar de Baal derrubado pelo filho."}, "pura": {"t": "Purá", "d": "Servo de Gideão que desceu com ele ao acampamento midianita à noite (Jz 7.10-11)."}, "orebe": {"t": "Orebe", "d": "Príncipe midianita ('corvo') morto pelos efraimitas na penha que recebeu seu nome (Jz 7.25)."}, "zeebe": {"t": "Zeebe", "d": "Príncipe midianita ('lobo') morto junto a um lagar na perseguição de Gideão (Jz 7.25)."}, "zeba": {"t": "Zebá", "d": "Rei midianita capturado e morto por Gideão junto com Zalmuna (Jz 8)."}, "zalmuna": {"t": "Zalmuna", "d": "Rei midianita executado por Gideão em vingança pelos irmãos mortos no Tabor (Jz 8)."}, "abimeleque": {"t": "Abimeleque", "d": "Filho de Gideão com uma concubina de Siquém; matou 70 irmãos e se fez rei, morrendo sob uma pedra de moinho (Jz 9)."}, "jotao": {"t": "Jotão", "d": "Único filho de Gideão que escapou; proferiu do monte Gerizim a parábola das árvores contra Abimeleque (Jz 9)."}, "gaal": {"t": "Gaal", "d": "Filho de Ebede; liderou Siquém na revolta contra Abimeleque e foi expulso por Zebul (Jz 9)."}, "zebul": {"t": "Zebul", "d": "Governador de Siquém, leal a Abimeleque; traiu os planos de Gaal (Jz 9)."}, "tola": {"t": "Tola", "d": "Juiz de Issacar que julgou Israel por 23 anos após Abimeleque (Jz 10.1-2)."}, "jair": {"t": "Jair", "d": "Juiz gileadita com 30 filhos em 30 jumentos e 30 cidades; julgou 22 anos (Jz 10.3-5)."}, "jefte": {"t": "Jefté", "d": "Gileadita rejeitado por ser filho de prostituta; venceu Amom e fez o voto trágico sobre sua filha (Jz 11–12)."}, "elom": {"t": "Elom", "d": "Juiz zebulonita que julgou Israel por 10 anos (Jz 12.11-12)."}, "abdom": {"t": "Abdom", "d": "Juiz piratonita com 40 filhos e 30 netos em 70 jumentos (Jz 12.13-15)."}, "sansao": {"t": "Sansão", "d": "Juiz nazireu da tribo de Dã, de força extraordinária; lutou sozinho contra os filisteus (Jz 13–16)."}, "manoa": {"t": "Manoá", "d": "Danita de Zorá, pai de Sansão; recebeu do Anjo do SENHOR o anúncio do nascimento (Jz 13)."}, "dalila": {"t": "Dalila", "d": "Mulher do vale de Soreque que, paga pelos filisteus, arrancou de Sansão o segredo da força (Jz 16)."}, "mica": {"t": "Mica", "d": "Efraimita que fez um santuário particular com imagem, éfode e terafins, e contratou um levita (Jz 17–18).", "s": ["Mica"]}, "josue": {"t": "Josué", "d": "Sucessor de Moisés que liderou a conquista de Canaã; sua morte abre o período dos juízes (Jz 1–2)."}, "calebe": {"t": "Calebe", "d": "Companheiro fiel de Josué na espionagem de Canaã; ofereceu a filha Acsa a quem tomasse Quiriate-Sefer (Jz 1)."}, "acsa": {"t": "Acsa", "d": "Filha de Calebe, dada em casamento a Otniel; pediu ao pai as fontes de água (Jz 1.13-15)."}, "quenaz": {"t": "Quenaz", "d": "Irmão (ou clã) de Calebe; pai de Otniel, o primeiro juiz."}, "adoni-bezeque": {"t": "Adoni-Bezeque", "d": "Rei cananeu de Bezeque que cortava polegares de reis vencidos e sofreu a mesma pena (Jz 1.5-7)."}, "cusa-risataim": {"t": "Cusã-Risataim", "d": "Rei da Mesopotâmia que oprimiu Israel por 8 anos até a libertação por Otniel (Jz 3.8-10)."}, "eglom": {"t": "Eglom", "d": "Rei de Moabe, homem muito gordo, que oprimiu Israel por 18 anos e foi morto por Eúde (Jz 3)."}, "jabim": {"t": "Jabim", "d": "Rei cananeu que reinava em Hazor; seu general era Sísera (Jz 4)."}, "abinoao": {"t": "Abinoão", "d": "Pai de Baraque, de Quedes de Naftali (Jz 4.6)."}, "moises": {"t": "Moisés", "d": "Libertador e legislador de Israel no êxodo do Egito; a aliança quebrada em Juízes é a que Deus firmou por meio dele."}, "baal": {"t": "Baal", "d": "Principal divindade cananeia da tempestade e fertilidade; o grande rival da fidelidade a YHWH no livro."}, "baal-berite": {"t": "Baal-Berite", "d": "'Senhor da aliança', divindade adorada em Siquém; seu templo financiou o golpe de Abimeleque (Jz 9.4)."}, "dagom": {"t": "Dagom", "d": "Divindade dos filisteus ligada ao grão; em sua festa Sansão derrubou o templo (Jz 16.23)."}, "filisteus": {"t": "Filisteus", "d": "Povo do mar instalado na planície costeira (Gaza, Asquelom etc.); opressores de Israel na era de Sansão.", "g": 1}, "midia": {"t": "Midiã", "d": "Povo nômade do deserto que invadia Israel em camelos na época da colheita; vencido por Gideão (Jz 6–8)."}, "midianitas": {"t": "Midianitas", "d": "O povo de Midiã, opressor de Israel por 7 anos até a vitória de Gideão."}, "amaleque": {"t": "Amaleque", "d": "Povo do deserto, inimigo constante de Israel; aliou-se a Midiã e a Moabe nas invasões."}, "amalequitas": {"t": "Amalequitas", "d": "O povo de Amaleque, saqueador aliado de Midiã contra Israel."}, "moabe": {"t": "Moabe", "d": "Reino a leste do mar Morto, descendente de Ló; sob Eglom oprimiu Israel 18 anos.", "g": 1}, "amom": {"t": "Amom", "d": "Reino a leste do Jordão, descendente de Ló; combatido por Jefté (Jz 10–11).", "g": 1, "s": ["Amom"]}, "amonitas": {"t": "Amonitas", "d": "O povo de Amom, que reivindicava as terras de Gileade e foi vencido por Jefté."}, "cananeus": {"t": "Cananeus", "d": "Habitantes de Canaã que Israel deveria desapossar; sua permanência é o estopim da crise do livro."}, "queneu": {"t": "Queneu", "d": "Clã nômade aparentado ao sogro de Moisés, que habitava entre os israelitas; o clã de Héber e Jael."}, "siquem": {"t": "Siquém", "d": "Cidade entre os montes Ebal e Gerizim, palco do reinado de Abimeleque; hoje o sítio de Tell Balata.", "g": 1}, "betel": {"t": "Betel", "d": "'Casa de Deus', importante santuário ao norte de Jerusalém; ali Israel consultava o SENHOR (Jz 20).", "g": 1}, "gilgal": {"t": "Gilgal", "d": "Primeiro acampamento de Israel após cruzar o Jordão, perto de Jericó; de lá subiu o Anjo do SENHOR (Jz 2.1).", "g": 1}, "hebrom": {"t": "Hebrom", "d": "Antiga cidade de Judá nas montanhas do sul, dada a Calebe; Sansão levou até lá as portas de Gaza.", "g": 1}, "hazor": {"t": "Hazor", "d": "Maior cidade cananeia do norte, capital de Jabim; um dos sítios arqueológicos mais escavados de Israel.", "g": 1}, "tabor": {"t": "Tabor", "d": "Monte isolado no vale de Jezreel onde Baraque reuniu 10 mil homens contra Sísera (Jz 4).", "g": 1}, "quisom": {"t": "Quisom", "d": "Ribeiro do vale de Jezreel que arrastou os carros de Sísera na batalha (Jz 4–5).", "g": 1}, "ofra": {"t": "Ofra", "d": "Cidade dos abiezritas em Manassés, terra de Gideão; ali ele ergueu o altar 'O SENHOR é paz'.", "g": 1}, "gaza": {"t": "Gaza", "d": "Uma das cinco cidades filisteias, na costa sul; Sansão arrancou suas portas e ali morreu no templo de Dagom.", "g": 1}, "asquelom": {"t": "Asquelom", "d": "Cidade filisteia costeira onde Sansão feriu 30 homens (Jz 14.19); grande sítio arqueológico.", "g": 1}, "timnate": {"t": "Timnate", "d": "Cidade na fronteira filisteia onde Sansão buscou esposa (Jz 14); identificada com Tel Batash.", "g": 1}, "zora": {"t": "Zorá", "d": "Cidade de Dã na Sefelá, terra natal de Sansão (Jz 13.2).", "g": 1}, "estaol": {"t": "Estaol", "d": "Cidade vizinha a Zorá; entre as duas o Espírito começou a impelir Sansão (Jz 13.25).", "g": 1}, "gibea": {"t": "Gibeá", "d": "Cidade de Benjamim onde ocorreu o crime contra a concubina, estopim da guerra civil (Jz 19–20).", "g": 1}, "mizpa": {"t": "Mizpá", "d": "'Atalaia', local de assembleia de Israel em Gileade e em Benjamim; ali Jefté falou perante o SENHOR.", "g": 1}, "gileade": {"t": "Gileade", "d": "Região montanhosa a leste do Jordão, terra de Jair e Jefté.", "g": 1}, "silo": {"t": "Siló", "d": "Sede do tabernáculo no período dos juízes, em Efraim; cenário do rapto das moças na festa (Jz 21).", "g": 1}, "belem": {"t": "Belém", "d": "Cidade de Judá, terra do levita de Mica e da concubina de Jz 19; mais tarde, cidade de Davi.", "g": 1}, "jerusalem": {"t": "Jerusalém", "d": "Chamada Jebus no período; os jebuseus permaneceram nela junto aos benjamitas (Jz 1.21).", "g": 1}, "sucote": {"t": "Sucote", "d": "Cidade de Gade no vale do Jordão que negou pão a Gideão e foi castigada (Jz 8).", "g": 1}, "penuel": {"t": "Penuel", "d": "Cidade transjordaniana cuja torre Gideão derrubou por lhe negar ajuda (Jz 8).", "g": 1}, "jordao": {"t": "Jordão", "d": "Rio que divide Israel da Transjordânia; seus vaus foram decisivos nas guerras de Eúde, Gideão e Jefté.", "g": 1}, "arnom": {"t": "Arnom", "d": "Rio-fronteira entre Moabe e os amorreus, citado na disputa territorial de Jefté (Jz 11).", "g": 1}, "canaa": {"t": "Canaã", "d": "A terra prometida a oeste do Jordão, habitada pelos povos que Israel deveria desapossar.", "g": 1}, "egito": {"t": "Egito", "d": "Terra da escravidão de onde o SENHOR tirou Israel; memória invocada nas repreensões do livro.", "g": 1}, "mesopotamia": {"t": "Mesopotâmia", "d": "'Entre rios' (Aram-Naaraim), região do rei Cusã-Risataim, primeiro opressor (Jz 3.8).", "g": 1}, "harosete": {"t": "Harosete", "d": "Harosete dos Gentios, base militar de Sísera, perto do Quisom (Jz 4).", "g": 1}, "quedes": {"t": "Quedes", "d": "Cidade de refúgio em Naftali, terra de Baraque (Jz 4.6).", "g": 1}, "lais": {"t": "Laís", "d": "Cidade 'quieta e confiada' no extremo norte, destruída pelos danitas e renomeada Dã (Jz 18).", "g": 1}, "rama": {"t": "Ramá", "d": "Cidade de Benjamim entre Ramá e Betel, perto da palmeira de Débora (Jz 4.5).", "g": 1, "s": ["Ramá"]}, "rimom": {"t": "Rimom", "d": "A penha de Rimom, refúgio dos 600 benjamitas sobreviventes da guerra civil (Jz 20.47).", "g": 1}, "boquim": {"t": "Boquim", "d": "'Os que choram': lugar onde Israel chorou após a repreensão do Anjo do SENHOR (Jz 2.1-5)."}, "megido": {"t": "Megido", "d": "Cidade-fortaleza no vale de Jezreel, não conquistada por Manassés (Jz 1.27); célebre sítio arqueológico.", "g": 1}, "taanaque": {"t": "Taanaque", "d": "Cidade cananeia perto de Megido; junto às suas águas se travou a batalha de Débora (Jz 5.19).", "g": 1}, "gezer": {"t": "Gezer", "d": "Cidade cananeia que Efraim não desapossou (Jz 1.29); importante sítio arqueológico.", "g": 1}, "aijalom": {"t": "Aijalom", "d": "Vale e cidade na fronteira de Dã, onde os amorreus resistiram (Jz 1.35).", "g": 1}, "sidom": {"t": "Sidom", "d": "Grande cidade fenícia ao norte; seus deuses seduziram Israel (Jz 10.6).", "g": 1}, "libano": {"t": "Líbano", "d": "Cordilheira ao norte de Israel, limite dos povos deixados para provar Israel (Jz 3.3).", "g": 1}, "negebe": {"t": "Negebe", "d": "Região árida do sul de Judá mencionada na partilha de Calebe (Jz 1).", "g": 1}, "edom": {"t": "Edom", "d": "Região de Seir, ao sul do mar Morto, ligada aos descendentes de Esaú; citada no cântico de Débora (Jz 5.4).", "g": 1}, "bezeque": {"t": "Bezeque", "d": "Cidade cananeia onde Judá venceu 10 mil homens e capturou Adoni-Bezeque (Jz 1.4-5).", "g": 1}, "quiriate-sefer": {"t": "Quiriate-Sefer", "d": "'Cidade do livro', antigo nome de Debir, tomada por Otniel (Jz 1.11-13).", "g": 1}, "bete-semes": {"t": "Bete-Semes", "d": "'Casa do sol', cidade na Sefelá não desapossada por Naftali/Dã (Jz 1.33).", "g": 1}, "samir": {"t": "Samir", "d": "Cidade na região montanhosa de Efraim onde viveu e foi sepultado o juiz Tola (Jz 10.1-2)."}, "tobe": {"t": "Tobe", "d": "Terra a leste do Jordão para onde Jefté fugiu e reuniu seu bando (Jz 11.3)."}, "juda": {"t": "Judá", "d": "Tribo do sul escolhida para subir primeiro contra os cananeus (Jz 1.2); tribo de Belém."}, "benjamim": {"t": "Benjamim", "d": "'Filho da direita', tribo de Eúde e de Gibeá; quase exterminada na guerra civil (Jz 19–21)."}, "efraim": {"t": "Efraim", "d": "Tribo central poderosa e ciumenta; conflitou com Gideão e com Jefté (episódio 'chibolete')."}, "manasses": {"t": "Manassés", "d": "Tribo de José dos dois lados do Jordão; tribo de Gideão."}, "zebulom": {"t": "Zebulom", "d": "Tribo do norte elogiada no cântico de Débora por expor a vida na batalha (Jz 5.18)."}, "naftali": {"t": "Naftali", "d": "Tribo do norte, terra de Baraque; lutou com Zebulom contra Sísera."}, "issacar": {"t": "Issacar", "d": "Tribo do vale de Jezreel, tribo do juiz Tola; participou da batalha de Débora."}, "aser": {"t": "Aser", "d": "Tribo costeira do norte, censurada no cântico de Débora por ficar nos portos (Jz 5.17)."}, "ruben": {"t": "Rúben", "d": "Tribo transjordaniana censurada por hesitar 'entre os currais' na guerra de Débora (Jz 5.15-16)."}, "simeao": {"t": "Simeão", "d": "Tribo do extremo sul, aliada de Judá na campanha inicial (Jz 1.3)."}, "da": {"t": "Dã", "d": "Tribo de Sansão, espremida pelos amorreus; migrou ao norte e tomou Laís (Jz 18).", "s": ["Dã"]}, "gentios": {"t": "Gentios", "d": "'As nações': povos não israelitas; compõe o nome Harosete dos Gentios (Jz 4)."}, "efode": {"t": "Éfode", "d": "Veste sacerdotal ligada à consulta a Deus; o éfode de ouro de Gideão tornou-se laço de idolatria (Jz 8.27)."}, "nazireu": {"t": "Nazireu", "d": "O 'separado' por voto: sem vinho, sem tocar cadáver, sem cortar o cabelo (Nm 6); a vocação de Sansão."}, "levita": {"t": "Levita", "d": "Membro da tribo de Levi, dedicada ao serviço sagrado; dois levitas anônimos protagonizam Jz 17–19."}, "concubina": {"t": "Concubina", "d": "Esposa de status secundário no mundo antigo; a tragédia da concubina do levita expõe o caos moral (Jz 19)."}, "terafins": {"t": "Terafins", "d": "Ídolos domésticos usados para adivinhação; parte do santuário ilegítimo de Mica (Jz 17–18)."}, "profetisa": {"t": "Profetisa", "d": "Mulher porta-voz de Deus; título de Débora (Jz 4.4), como Miriã e Hulda."}, "holocausto": {"t": "Holocausto", "d": "Sacrifício totalmente queimado, símbolo de consagração completa a Deus."}, "astarotes": {"t": "Astarotes", "d": "Plural de Astarte: deusas cananeias do amor e da guerra, adoradas por Israel infiel junto aos baalins (Jz 2.13; 10.6)."}, "baalins": {"t": "Baalins", "d": "Plural de Baal: os 'senhores' locais do panteão cananeu; servi-los é o pecado-modelo do ciclo dos juízes (Jz 2.11)."}, "ibza": {"t": "Ibzã", "d": "Juiz de Belém com 30 filhos e 30 filhas; julgou Israel 7 anos (Jz 12.8-10)."}};
+
+/* Quiz por capítulo: 2 perguntas objetivas, respostas no próprio texto */
+const QUIZ = {
+ 1:[{q:"Qual tribo o SENHOR mandou subir primeiro contra os cananeus?",o:["Efraim","Judá","Benjamim","Dã"],a:1},
+    {q:"O que Acsa pediu a Calebe, seu pai?",o:["Um campo de trigo","Fontes de água","Uma cidade","Rebanhos"],a:1}],
+ 2:[{q:"Em que lugar o Anjo do SENHOR repreendeu Israel, e o povo chorou?",o:["Gilgal","Betel","Boquim","Siló"],a:2},
+    {q:"O que acontecia quando morria o juiz?",o:["O povo elegia um rei","O povo voltava a se corromper","Havia paz definitiva","As tribos se separavam"],a:1}],
+ 3:[{q:"Qual era a característica física de Eúde?",o:["Muito alto","Canhoto","Cego de um olho","Muito forte"],a:1},
+    {q:"Que rei Eúde matou?",o:["Jabim de Hazor","Cusã-Risataim","Eglom de Moabe","Adoni-Bezeque"],a:2}],
+ 4:[{q:"Onde Débora julgava Israel?",o:["Na porta da cidade","Debaixo de uma palmeira","No tabernáculo em Siló","No monte Tabor"],a:1},
+    {q:"Quem matou Sísera?",o:["Baraque","Débora","Jael","Héber"],a:2}],
+ 5:[{q:"O capítulo 5 é…",o:["Uma genealogia","Um cântico de vitória","Uma lei","Uma parábola"],a:1},
+    {q:"Que ribeiro arrastou os inimigos na batalha?",o:["Jordão","Arnom","Quisom","Jaboque"],a:2}],
+ 6:[{q:"Que sinal Gideão pediu com a lã?",o:["Fogo do céu","Orvalho","Chuva","Trovão"],a:1},
+    {q:"Que apelido Gideão recebeu ao derrubar o altar de Baal?",o:["Jerubaal","Abiezer","Joás","Ofra"],a:0}],
+ 7:[{q:"Com quantos homens Gideão venceu Midiã?",o:["32.000","10.000","300","70"],a:2},
+    {q:"O que os 300 levavam nas mãos?",o:["Espadas e escudos","Arcos e flechas","Trombetas e cântaros com tochas","Lanças"],a:2}],
+ 8:[{q:"O que Gideão fez com o ouro do despojo?",o:["Um altar","Um éfode","Uma coroa","Um bezerro"],a:1},
+    {q:"Que cidades foram castigadas por negar pão ao exército?",o:["Siquém e Betel","Sucote e Penuel","Gaza e Asquelom","Mizpá e Gileade"],a:1}],
+ 9:[{q:"Quem contou a parábola das árvores contra Abimeleque?",o:["Gaal","Zebul","Jotão","Joás"],a:2},
+    {q:"Como Abimeleque foi ferido de morte?",o:["Por uma flecha","Por uma pedra de moinho lançada por uma mulher","Em duelo com Gaal","Por seus soldados"],a:1}],
+ 10:[{q:"Quais juízes aparecem neste capítulo?",o:["Ibzã e Elom","Tola e Jair","Sangar e Otniel","Abdom e Sansão"],a:1},
+     {q:"Diante da miséria de Israel arrependido, o SENHOR…",o:["Permaneceu indiferente","Angustiou-se em sua alma","Enviou fogo do céu","Silenciou para sempre"],a:1}],
+ 11:[{q:"O voto de Jefté prometia oferecer…",o:["Um cordeiro","O melhor boi","O que saísse da porta de sua casa","Prata ao santuário"],a:2},
+     {q:"Contra que povo Jefté guerreou?",o:["Filisteus","Amonitas","Midianitas","Moabitas"],a:1}],
+ 12:[{q:"Que palavra denunciava os efraimitas nos vaus do Jordão?",o:["Hosana","Chibolete","Aleluia","Maranata"],a:1},
+     {q:"Qual tribo entrou em conflito com Jefté?",o:["Benjamim","Judá","Efraim","Manassés"],a:2}],
+ 13:[{q:"Sansão deveria ser, desde o ventre…",o:["Sacerdote","Nazireu","Profeta","Levita"],a:1},
+     {q:"Quem anunciou o nascimento de Sansão?",o:["Um profeta","O Anjo do SENHOR","Um sonho","O sacerdote de Siló"],a:1}],
+ 14:[{q:"O enigma de Sansão nasceu de…",o:["Uma vinha","Um leão e mel","Uma raposa","Um poço"],a:1},
+     {q:"Onde Sansão buscou esposa?",o:["Gaza","Timnate","Asquelom","Hebrom"],a:1}],
+ 15:[{q:"Com que arma Sansão feriu mil homens?",o:["Uma espada","Uma aguilhada","Uma queixada de jumento","Uma estaca"],a:2},
+     {q:"Como Deus respondeu à sede de Sansão?",o:["Mandou chuva","Abriu uma fonte","Enviou um anjo com água","Levou-o a um poço"],a:1}],
+ 16:[{q:"A quem Sansão revelou o segredo da força?",o:["À sua mãe","A Dalila","Aos príncipes filisteus","A um servo"],a:1},
+     {q:"O templo derrubado por Sansão era do deus…",o:["Baal","Moloque","Dagom","Quemós"],a:2}],
+ 17:[{q:"O que havia no santuário particular de Mica?",o:["A arca da aliança","Imagem, éfode e terafins","Um altar de bronze","Os rolos da Lei"],a:1},
+     {q:"Quem Mica contratou como sacerdote?",o:["Um profeta","Um levita","Seu filho mais velho","Um sacerdote de Siló"],a:1}],
+ 18:[{q:"Qual tribo buscava herança e migrou ao norte?",o:["Aser","Dã","Simeão","Rúben"],a:1},
+     {q:"Que cidade quieta e confiada foi tomada?",o:["Laís","Siló","Gibeá","Betel"],a:0}],
+ 19:[{q:"A tragédia do capítulo envolve…",o:["A filha de Jefté","A concubina do levita","A mulher de Manoá","Acsa"],a:1},
+     {q:"Em que cidade ocorreu o crime?",o:["Belém","Ramá","Gibeá","Jebus"],a:2}],
+ 20:[{q:"Como Israel se reuniu contra o crime?",o:["Tribo por tribo","Como um só homem","Apenas Judá subiu","Sob um rei"],a:1},
+     {q:"Contra qual tribo foi a guerra?",o:["Dã","Efraim","Benjamim","Manassés"],a:2}],
+ 21:[{q:"Qual era o dilema final de Israel?",o:["Reconstruir Gibeá","Conseguir esposas para Benjamim","Escolher um rei","Retomar Laís"],a:1},
+     {q:"Como termina o livro?",o:["'E houve paz por 40 anos'","'Cada um fazia o que parecia reto aos seus olhos'","'E o SENHOR levantou um rei'","'E Israel serviu ao SENHOR'"],a:1}]
+};
 /* ===================================================================== */
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -323,7 +630,7 @@ import {
   signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile, signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
-  getFirestore, collection, query, where, onSnapshot,
+  getFirestore, initializeFirestore, persistentLocalCache, collection, query, where, onSnapshot,
   addDoc, updateDoc, deleteDoc, setDoc, doc, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -335,16 +642,246 @@ if(!FIREBASE_CONFIG.apiKey){
   $('setupWarn').classList.remove('hidden');
   throw new Error('Firebase não configurado');
 }
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
 
 const fbApp = initializeApp(FIREBASE_CONFIG);
 const auth = getAuth(fbApp);
-const db = getFirestore(fbApp);
+let db;
+try{ db = initializeFirestore(fbApp,{localCache:persistentLocalCache()}); }
+catch(e){ db = getFirestore(fbApp); }
 const COL = collection(db,'comentarios');
 const LIKES = collection(db,'curtidas');
+const FAVS = collection(db,'destaques');
+const QS = collection(db,'perguntas');
+const DEN = collection(db,'denuncias');
+const DEVO = collection(db,'devocionais');
+const MEM = collection(db,'memoria');
 
-let user=null, all={}, likes={}, cur=1, unsubC=null, unsubL=null;
-/* all: { "cap:verso": [ {id,uid,author,text,ts,parent} ] }
-   likes: { commentId: Set(uid) } */
+let user=null, all={}, likes={}, favs=new Map(), perguntas={}, denuncias=[], dev={}, mem={}, live={on:false,c:1,v:1}, follow=false;
+let cur=1;
+let subs=[];
+
+/* ================= TEMA ================= */
+function applyTheme(t){
+  if(t==='dark') document.documentElement.dataset.theme='dark';
+  else delete document.documentElement.dataset.theme;
+  $('btnTheme').textContent = t==='dark'?'☀️':'🌙';
+  try{ localStorage.setItem('jz_theme',t); }catch(e){}
+}
+$('btnTheme').onclick=()=>applyTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
+applyTheme(document.documentElement.dataset.theme==='dark'?'dark':'light');
+
+/* ================= FONTE / FOCO / ÁUDIO ================= */
+function applyFont(px){
+  px=Math.min(24,Math.max(14,px));
+  document.documentElement.style.setProperty('--vsize',px+'px');
+  try{ localStorage.setItem('jz_fs',px); }catch(e){}
+}
+let fs=17.5; try{ fs=parseFloat(localStorage.getItem('jz_fs'))||17.5; }catch(e){}
+applyFont(fs);
+$('fontMinus').onclick=()=>{ fs-=1; applyFont(fs); };
+$('fontPlus').onclick=()=>{ fs+=1; applyFont(fs); };
+$('btnFocus').onclick=()=>{
+  const on=document.body.classList.toggle('focus');
+  $('btnFocus').classList.toggle('primary',on);
+  toast(on?'Modo foco: só o texto. Toque de novo para sair.':'Modo foco desligado.');
+};
+let speakingChap=0;
+function stopAudio(){
+  try{ speechSynthesis.cancel(); }catch(e){}
+  speakingChap=0;
+  $('btnAudio').textContent='🔊';
+  document.querySelectorAll('.verse.speaking').forEach(d=>d.classList.remove('speaking'));
+}
+$('btnAudio').onclick=()=>{
+  if(!('speechSynthesis' in window)){ toast('Seu navegador não suporta leitura em voz alta.'); return; }
+  if(speakingChap){ stopAudio(); return; }
+  speakingChap=cur;
+  $('btnAudio').textContent='⏹';
+  const verses=BOOK.chapters[cur-1];
+  verses.forEach((text,i)=>{
+    const u=new SpeechSynthesisUtterance('Versículo '+(i+1)+'. '+text);
+    u.lang='pt-BR'; u.rate=0.95;
+    u.onstart=()=>{
+      document.querySelectorAll('.verse.speaking').forEach(d=>d.classList.remove('speaking'));
+      const d=document.querySelector(`.verse[data-v="${i+1}"]`);
+      if(d){ d.classList.add('speaking'); d.scrollIntoView({block:'center',behavior:'smooth'}); }
+    };
+    if(i===verses.length-1) u.onend=stopAudio;
+    speechSynthesis.speak(u);
+  });
+  toast('Lendo Juízes '+cur+' em voz alta.');
+};
+
+/* ================= NAVEGAÇÃO ENTRE TELAS ================= */
+let view='home';
+function showView(v){
+  view=v;
+  ['home','guide','read'].forEach(x=>{
+    const el=$('view'+x[0].toUpperCase()+x.slice(1));
+    if(el) el.classList.toggle('hidden',x!==v);
+  });
+  document.querySelectorAll('#sideNav button,#bottomNav button[data-view]').forEach(b=>
+    b.classList.toggle('on',b.dataset.view===v));
+  if(v==='read'&&user) renderAll();
+  if(v==='home'&&user) renderHome();
+  document.querySelector('.main').scrollTop=0;
+}
+document.querySelectorAll('#sideNav button,#bottomNav button[data-view]').forEach(b=>
+  b.addEventListener('click',()=>showView(b.dataset.view)));
+
+/* ================= ONBOARDING ================= */
+function openOnboard(){
+  const steps=[
+    ['Bem-vindo! 👋','Este app é a nossa classe de Juízes em forma de comunidade: você lê a Bíblia, comenta versículo por versículo e aprende com os colegas. Vamos ver o essencial em 3 passos.'],
+    ['1 · Leia com profundidade 🔍','Comece pela pergunta do professor no topo do capítulo. As palavras sublinhadas abrem significados, mapas e arqueologia. Ao comentar, use os botões Observação, Interpretação, Aplicação e Oração.'],
+    ['2 · Caminhe com a turma 🙏','Diga "Amém" aos comentários que edificarem você, responda os colegas e acompanhe seu progresso e selos na aba Turma (🏆).'],
+    ['3 · Medite e ore 🕊','Cada capítulo tem um devocional privado (só você vê), marca-texto colorido ★ e memorização de versículos 🧠. O guia completo está na aba 🧭 Como estudar. Boa jornada!']
+  ];
+  let i=0;
+  const wrap=document.createElement('div');
+  const body=document.createElement('div'); body.className='ob-step';
+  const foot=document.createElement('div'); foot.style.cssText='display:flex;gap:8px;justify-content:flex-end';
+  const skip=document.createElement('button'); skip.className='btn'; skip.textContent='Pular';
+  const next=document.createElement('button'); next.className='btn primary';
+  function show(){
+    body.innerHTML='<b>'+steps[i][0]+'</b><br>'+steps[i][1];
+    next.textContent=i<steps.length-1?'Próximo →':'Começar!';
+  }
+  const done=()=>{ try{ localStorage.setItem('jz_onboard','1'); }catch(e){} closeModal(); };
+  skip.onclick=done;
+  next.onclick=()=>{ if(i<steps.length-1){ i++; show(); } else done(); };
+  foot.append(skip,next);
+  wrap.append(body,foot);
+  show();
+  openModal('Como usar o app',wrap);
+}
+
+/* ================= TELA: COMO ESTUDAR ================= */
+$('viewGuide').innerHTML=`
+  <h2>Como estudar a Bíblia</h2>
+  <div class="sub">Dois caminhos que se completam: o estudo indutivo (entender o texto) e a leitura devocional (encontrar-se com Deus no texto).</div>
+
+  <h3>1 · Estudo indutivo</h3>
+  <p>Indutivo significa partir do próprio texto, e não de opiniões prontas. São três movimentos, sempre nesta ordem:</p>
+  <div class="gstep"><b>🔍 Observação: o que o texto diz?</b><br>Quem são os personagens? O que acontece, onde e quando? Que palavras se repetem? Há contrastes ("mas", "porém"), causas ("porque") e conclusões ("portanto")? Nesta fase você ainda não interpreta: só enxerga.</div>
+  <div class="gstep"><b>💡 Interpretação: o que o texto significa?</b><br>O que isso significava para o primeiro leitor? Como a passagem se liga ao capítulo e ao livro inteiro? O que este texto revela sobre Deus e sobre o ser humano? Use o léxico (palavras sublinhadas), o glossário e o interlinear para checar termos.</div>
+  <div class="gstep"><b>🎯 Aplicação: o que eu faço com isso?</b><br>Que atitude, pecado, promessa ou exemplo o texto expõe na minha vida? Aplicação boa é concreta: tem verbo, tem prazo e cabe na sua semana.</div>
+
+  <h3>2 · Leitura devocional</h3>
+  <p>O estudo enche a mente; o devocional dobra o coração. Depois de entender, desacelere:</p>
+  <div class="gstep"><b>📖 Ler</b> devagar, mais de uma vez, de preferência em voz baixa.</div>
+  <div class="gstep"><b>🤔 Meditar:</b> escolha um versículo do capítulo e rume com ele o dia inteiro. O que Deus está dizendo a você por meio dele?</div>
+  <div class="gstep"><b>🙏 Orar:</b> transforme o texto em oração com as suas palavras: confesse, agradeça, peça.</div>
+  <div class="gstep"><b>👣 Praticar:</b> decida um passo concreto de obediência antes de fechar a Bíblia.</div>
+
+  <h3>3 · Como fazer isso dentro do app</h3>
+  <ol>
+    <li>Comece pela <b>pergunta do professor</b> no topo do capítulo: ela orienta a leitura da semana.</li>
+    <li>Leia o capítulo. Toque nas <b>palavras sublinhadas</b> para ver significados, mapas e achados arqueológicos.</li>
+    <li>Abra um versículo e use os botões <b>Observação / Interpretação / Aplicação / Oração</b> para estruturar seu comentário.</li>
+    <li>Leia os comentários dos colegas, diga <b>🙏 Amém</b> ao que edificar e <b>responda</b> para aprofundar.</li>
+    <li>Marque com <b>★</b> os versículos que falaram com você.</li>
+    <li>Feche no <b>devocional privado</b> do capítulo: escreva sua meditação e sua oração (só você vê).</li>
+    <li>Gere um <b>card</b> do versículo e compartilhe para abençoar alguém.</li>
+  </ol>
+  <div class="gnote">Sugestão de ritmo: 20 a 30 minutos. Não tente comentar todos os versículos de uma vez; profundidade em poucos vale mais que pressa em muitos.</div>`;
+
+/* ================= TELA: INÍCIO ================= */
+function votd(){
+  const doy=Math.floor(Date.now()/86400000);
+  let idx=doy%619;
+  for(let c=1;c<=21;c++){
+    const n=BOOK.chapters[c-1].length;
+    if(idx<n) return {c,v:idx+1,text:BOOK.chapters[c-1][idx]};
+    idx-=n;
+  }
+  return {c:1,v:1,text:BOOK.chapters[0][0]};
+}
+function streak(){
+  const s=userStats()[user.uid];
+  if(!s||!s.daySet) return 0;
+  const days=s.daySet;
+  let n=0, d=new Date();
+  if(!days.has(d.toDateString())) d.setDate(d.getDate()-1);
+  while(days.has(d.toDateString())){ n++; d.setDate(d.getDate()-1); }
+  return n;
+}
+function renderHome(){
+  const h=new Date().getHours();
+  const saud=h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';
+  const name=firstName(user&&(user.displayName||user.email));
+  const w=currentWeek(),p=PLAN[w];
+  const d=votd();
+  const stats=userStats()[user.uid]||{total:0,amens:0};
+  const nBadges=BADGES.filter(b=>b.f(Object.assign({replies:0,days:0,fullChapter:false},stats))).length;
+  let last=1; try{ last=parseInt(localStorage.getItem('jz_last'))||p.chapters[0]; }catch(e){ last=p.chapters[0]; }
+  const el=$('viewHome');
+  el.innerHTML=`
+    <div class="hi">${saud}, <span class="hl"></span></div>
+    <div class="sub">Ler · Estudar · Meditar · Orar</div>
+    <div class="hgrid">
+      <div class="hcard gold" style="grid-column:1/-1">
+        <div class="t">Versículo do dia</div>
+        <div class="votd" id="votdText"></div>
+        <div class="ref">Juízes ${d.c}:${d.v}</div>
+        <div class="row">
+          <button class="btn" id="votdGo">Abrir no capítulo</button>
+          <button class="btn" id="votdCard">🖼 Gerar card</button>
+        </div>
+      </div>
+      <div class="hcard">
+        <div class="t">Plano da semana · ${w+1} de ${PLAN.length}</div>
+        <div style="font-weight:600;font-size:14.5px">${p.label}</div>
+        <div class="wkchips" id="wkChips"></div>
+        <button class="btn primary" id="homeContinue">Continuar em Juízes ${last}</button>
+      </div>
+      <div class="hcard">
+        <div class="t">Sua caminhada</div>
+        <div class="hstats">
+          <div><div class="big">${stats.total||0}</div><div class="lbl2">comentários</div></div>
+          <div><div class="big">${stats.amens||0}</div><div class="lbl2">améns recebidos</div></div>
+          <div><div class="big">${favs.size}</div><div class="lbl2">destaques</div></div>
+          <div><div class="big">🔥 ${streak()}</div><div class="lbl2">dias seguidos</div></div>
+          <div><div class="big">${nBadges}/6</div><div class="lbl2">selos</div></div>
+        </div>
+      </div>
+      <div class="hcard" style="grid-column:1/-1">
+        <div class="t">Atalhos</div>
+        <div class="hgrid" style="gap:8px">
+          <button class="shortcut" id="scGuide"><span class="ic">🧭</span><span>Como estudar a Bíblia<small>método indutivo e leitura devocional</small></span></button>
+          <button class="shortcut" id="scSearch"><span class="ic">🔍</span><span>Buscar<small>no texto e nos comentários</small></span></button>
+          <button class="shortcut" id="scFavs"><span class="ic">★</span><span>Meus destaques<small>versículos que marcaram você</small></span></button>
+          <button class="shortcut" id="scRank"><span class="ic">🏆</span><span>Turma e selos<small>ranking e conquistas</small></span></button>
+          <button class="shortcut" id="scMem"><span class="ic">🧠</span><span>Memorizar<small id="scMemSub">revisão espaçada de versículos</small></span></button>
+        </div>
+      </div>
+    </div>`;
+  el.querySelector('.hi .hl').textContent=name;
+  const vt=el.querySelector('#votdText'); lexify(vt,d.text);
+  el.querySelector('#votdGo').onclick=()=>{ showView('read'); goTo(d.c,d.v); };
+  el.querySelector('#votdCard').onclick=()=>makeCard(d.c,d.v,d.text);
+  const chips=el.querySelector('#wkChips');
+  p.chapters.forEach(c=>{
+    const b=document.createElement('button');
+    const mine=(userStats()[user.uid]||{perChap:{}}).perChap||{};
+    const n=mine[c]?mine[c].size:0;
+    b.innerHTML=`Jz ${c} <b>${n>0?'· '+n+' ✦':''}</b>`;
+    b.onclick=()=>{ cur=c; showView('read'); };
+    chips.appendChild(b);
+  });
+  el.querySelector('#homeContinue').onclick=()=>{ cur=last; showView('read'); };
+  el.querySelector('#scGuide').onclick=()=>showView('guide');
+  el.querySelector('#scSearch').onclick=()=>$('btnSearch').click();
+  el.querySelector('#scFavs').onclick=()=>$('btnFavs').click();
+  el.querySelector('#scRank').onclick=()=>$('btnRank').click();
+  el.querySelector('#scMem').onclick=openReview;
+  const nd=dueCards().length;
+  if(nd) el.querySelector('#scMemSub').textContent=nd+' cartão(ns) para revisar hoje';
+}
+
 
 /* ================= AUTENTICAÇÃO ================= */
 function authError(code){
@@ -393,13 +930,18 @@ onAuthStateChanged(auth,u=>{
   if(u){
     $('landing').classList.add('hidden');
     $('app').classList.remove('hidden');
-    renderMe(); startListeners(); renderAll();
+    $('btnProf').classList.toggle('hidden',!isAdmin());
+    renderMe(); renderPlan(); startListeners(); renderAll(); showView('home');
+    const m=location.hash.match(/^#\/(\d{1,2})\/(\d{1,3})$/);
+    if(m){ const c=+m[1],v=+m[2];
+      if(c>=1&&c<=21&&v>=1&&v<=BOOK.chapters[c-1].length){ showView('read'); goTo(c,v); } }
+    let ob=null; try{ ob=localStorage.getItem('jz_onboard'); }catch(e){}
+    if(!ob) openOnboard();
   }else{
     $('app').classList.add('hidden');
     $('landing').classList.remove('hidden');
-    if(unsubC){unsubC();unsubC=null}
-    if(unsubL){unsubL();unsubL=null}
-    all={}; likes={};
+    subs.forEach(f=>f()); subs=[];
+    all={}; likes={}; favs=new Map(); perguntas={}; denuncias=[]; dev={}; mem={}; follow=false;
   }
 });
 function firstName(s){ return (s||'').trim().split(/\s+/)[0]||'?'; }
@@ -414,31 +956,84 @@ function renderMe(){
 }
 const isAdmin=()=>user&&user.email===ADMIN_EMAIL;
 
-/* ================= DADOS EM TEMPO REAL ================= */
+/* ================= PLANO DE LEITURA ================= */
+function currentWeek(){
+  const start=new Date(PLAN_START+'T00:00:00');
+  const diff=Math.floor((Date.now()-start.getTime())/(7*24*3600*1000));
+  return Math.min(Math.max(diff,0),PLAN.length-1);
+}
+function renderPlan(){
+  const w=currentWeek(), p=PLAN[w];
+  $('planWeek').textContent='Plano de leitura · Semana '+(w+1)+' de '+PLAN.length;
+  $('planWhat').textContent=p.label+' (Jz '+p.chapters.join(', ')+')';
+  $('planGo').onclick=()=>{ cur=p.chapters[0]; renderAll(); document.querySelector('.main').scrollTop=0; };
+}
+
+/* ================= LISTENERS ================= */
 function startListeners(){
-  if(unsubC)unsubC(); if(unsubL)unsubL();
-  unsubC=onSnapshot(query(COL,where('b','==','jz')),snap=>{
+  subs.forEach(f=>f()); subs=[];
+  subs.push(onSnapshot(query(COL,where('b','==','jz')),snap=>{
     all={};
     snap.forEach(d=>{
       const x=d.data(), k=x.c+':'+x.v;
       (all[k]=all[k]||[]).push({
         id:d.id, uid:x.uid, author:x.author, text:x.text, parent:x.parent||null,
-        ts:x.ts&&x.ts.toMillis?x.ts.toMillis():Date.now()
+        prof:!!x.prof, ts:x.ts&&x.ts.toMillis?x.ts.toMillis():Date.now()
       });
     });
     for(const k in all) all[k].sort((a,b)=>a.ts-b.ts);
     renderAll(true);
-  },err=>{ console.error(err); toast('Erro ao carregar comentários. Verifique as regras do Firestore.'); });
+  },err=>{ console.error(err); toast('Erro ao carregar comentários. Verifique as regras do Firestore.'); }));
 
-  unsubL=onSnapshot(query(LIKES,where('b','==','jz')),snap=>{
+  subs.push(onSnapshot(query(LIKES,where('b','==','jz')),snap=>{
     likes={};
-    snap.forEach(d=>{
-      const x=d.data();
-      (likes[x.commentId]=likes[x.commentId]||new Set()).add(x.uid);
-    });
+    snap.forEach(d=>{ const x=d.data(); (likes[x.commentId]=likes[x.commentId]||new Set()).add(x.uid); });
     refreshLikeButtons();
-  },err=>console.error(err));
+  },err=>console.error(err)));
+
+  subs.push(onSnapshot(query(FAVS,where('b','==','jz'),where('uid','==',user.uid)),snap=>{
+    favs=new Map();
+    snap.forEach(d=>{ const x=d.data(); favs.set(x.c+':'+x.v, x.color||'y'); });
+    refreshFavMarks();
+  },err=>console.error(err)));
+
+  subs.push(onSnapshot(query(QS,where('b','==','jz')),snap=>{
+    perguntas={};
+    snap.forEach(d=>{ const x=d.data(); perguntas[x.c]=x.text; });
+    renderAll(true);
+  },err=>console.error(err)));
+
+  subs.push(onSnapshot(query(MEM,where('b','==','jz'),where('uid','==',user.uid)),snap=>{
+    mem={};
+    snap.forEach(d=>{ const x=d.data(); mem[x.c+':'+x.v]={box:x.box||1,next:x.next||0}; });
+    document.querySelectorAll('button.memchip').forEach(b=>{
+      const on=!!mem[b.dataset.key];
+      b.textContent=on?'🧠 Memorizando':'🧠 Memorizar';
+      b.classList.toggle('on',on);
+    });
+  },err=>console.error(err)));
+
+  subs.push(onSnapshot(doc(db,'aovivo','jz'),snap=>{
+    live=snap.exists()?snap.data():{on:false,c:1,v:1};
+    renderLive();
+    if(follow&&live.on&&!isAdmin()){ cur=live.c; showView('read'); goTo(live.c,live.v); }
+  },err=>console.error(err)));
+
+  subs.push(onSnapshot(query(DEVO,where('b','==','jz'),where('uid','==',user.uid)),snap=>{
+    dev={};
+    snap.forEach(d=>{ const x=d.data(); dev[x.c]={med:x.med||'',ora:x.ora||''}; });
+  },err=>console.error(err)));
+
+  if(isAdmin()){
+    subs.push(onSnapshot(query(DEN,where('b','==','jz')),snap=>{
+      denuncias=[];
+      snap.forEach(d=>denuncias.push(Object.assign({id:d.id},d.data())));
+      $('btnProf').textContent = denuncias.length ? '📋•' : '📋';
+    },err=>console.error(err)));
+  }
 }
+
+/* ================= CURTIDAS ================= */
 async function toggleLike(cm){
   const ref=doc(db,'curtidas',cm.id+'_'+user.uid);
   const liked=likes[cm.id]&&likes[cm.id].has(user.uid);
@@ -449,11 +1044,150 @@ async function toggleLike(cm){
 }
 function refreshLikeButtons(){
   document.querySelectorAll('button.amem').forEach(b=>{
-    const id=b.dataset.id, set=likes[id];
-    const n=set?set.size:0, mine=set&&set.has(user.uid);
+    const id=b.dataset.id,set=likes[id];
+    const n=set?set.size:0,mine=set&&set.has(user.uid);
     b.textContent='🙏 Amém'+(n?' · '+n:'');
     b.classList.toggle('on',!!mine);
   });
+}
+
+/* ================= DESTAQUES COLORIDOS ================= */
+const FCOLORS={y:'#F5EEDD',g:'#DFEBD2',b:'#D8E7F1',p:'#F3DEE6'};
+const FLABELS={y:'🟡 Tocou-me',g:'🟢 Promessa',b:'🔵 Mandamento',p:'🟣 Aviso'};
+async function setFav(c,v,color){
+  try{ await setDoc(doc(db,'destaques','jz_'+c+'_'+v+'_'+user.uid),{b:'jz',c,v,uid:user.uid,color}); }
+  catch(e){ toast('Falha ao salvar destaque.'); }
+}
+async function removeFav(c,v){
+  try{ await deleteDoc(doc(db,'destaques','jz_'+c+'_'+v+'_'+user.uid)); }catch(e){}
+}
+function favPicker(c,v){
+  const wrap=document.createElement('div');
+  const hint=document.createElement('div'); hint.className='mhint';
+  hint.textContent='Escolha a cor do marca-texto:';
+  const row=document.createElement('div'); row.className='colorpick';
+  Object.keys(FCOLORS).forEach(k=>{
+    const b=document.createElement('button');
+    b.innerHTML=`<span class="cdot" style="background:${FCOLORS[k]}"></span>${FLABELS[k]}`;
+    b.onclick=()=>{ setFav(c,v,k); closeModal(); };
+    row.appendChild(b);
+  });
+  wrap.append(hint,row);
+  if(favs.has(c+':'+v)){
+    const rm=document.createElement('button'); rm.className='btn'; rm.textContent='Remover destaque';
+    rm.onclick=()=>{ removeFav(c,v); closeModal(); };
+    wrap.appendChild(rm);
+  }
+  openModal('Destacar Juízes '+c+':'+v,wrap);
+}
+function paintFav(div,vkey){
+  const col=favs.get(vkey);
+  div.classList.toggle('fav',!!col);
+  if(col) div.style.setProperty('--fcol',FCOLORS[col]); else div.style.removeProperty('--fcol');
+}
+function refreshFavMarks(){
+  document.querySelectorAll('.verse').forEach(div=>{
+    const v=div.dataset.v; if(!v)return;
+    paintFav(div,cur+':'+v);
+  });
+  document.querySelectorAll('button.favchip').forEach(b=>{
+    const on=favs.has(b.dataset.key);
+    b.classList.toggle('on',on);
+    b.textContent=on?'★ Destacado':'☆ Destacar';
+  });
+}
+
+/* ================= MEMORIZAÇÃO (repetição espaçada) ================= */
+const BOXDAYS=[1,3,7];
+async function toggleMem(c,v){
+  const key=c+':'+v, ref=doc(db,'memoria','jz_'+c+'_'+v+'_'+user.uid);
+  try{
+    if(mem[key]) await deleteDoc(ref);
+    else await setDoc(ref,{b:'jz',c,v,uid:user.uid,box:1,next:Date.now()});
+  }catch(e){ toast('Falha ao salvar.'); }
+}
+function dueCards(){
+  const now=Date.now();
+  return Object.entries(mem).filter(([k,m])=>m.next<=now)
+    .map(([k,m])=>{ const p=k.split(':'); return {c:+p[0],v:+p[1],box:m.box}; })
+    .sort((a,b)=>a.c-b.c||a.v-b.v);
+}
+function openReview(){
+  const due=dueCards(), total=Object.keys(mem).length;
+  const wrap=document.createElement('div');
+  if(!total){
+    wrap.innerHTML='<div class="mhint">Você ainda não escolheu versículos para memorizar. Abra um versículo e toque em 🧠 Memorizar.</div>';
+    openModal('Memorização',wrap); return;
+  }
+  if(!due.length){
+    wrap.innerHTML=`<div class="mhint">Tudo em dia! Você está memorizando ${total} versículo(s). Volte amanhã para revisar.</div>`;
+    openModal('Memorização',wrap); return;
+  }
+  let i=0;
+  const card=document.createElement('div'); card.className='fcard';
+  wrap.appendChild(card);
+  function show(){
+    if(i>=due.length){
+      card.innerHTML='<div class="fref">🎉 Revisão concluída!</div><div class="fmeta">Volte amanhã para a próxima rodada.</div>';
+      return;
+    }
+    const d=due[i], text=BOOK.chapters[d.c-1][d.v-1];
+    card.innerHTML=`<div class="fref">Juízes ${d.c}:${d.v}</div>
+      <div class="ftxt" style="color:var(--ink-soft);font-style:italic">Recite de memória e depois confira.</div>
+      <div class="frow"><button class="btn primary">Mostrar versículo</button></div>
+      <div class="fmeta">Cartão ${i+1} de ${due.length} · caixa ${d.box} de 3</div>`;
+    card.querySelector('button').onclick=()=>{
+      card.querySelector('.ftxt').textContent=text;
+      card.querySelector('.ftxt').style.cssText='';
+      const row=card.querySelector('.frow');
+      row.innerHTML='';
+      const ok=document.createElement('button'); ok.className='btn primary'; ok.textContent='✓ Acertei';
+      const no=document.createElement('button'); no.className='btn'; no.textContent='✗ Errei';
+      ok.onclick=()=>grade(d,true); no.onclick=()=>grade(d,false);
+      row.append(ok,no);
+    };
+  }
+  async function grade(d,hit){
+    const box=hit?Math.min(3,d.box+1):1;
+    const next=Date.now()+BOXDAYS[box-1]*86400000;
+    try{ await setDoc(doc(db,'memoria','jz_'+d.c+'_'+d.v+'_'+user.uid),{b:'jz',c:d.c,v:d.v,uid:user.uid,box,next}); }catch(e){}
+    i++; show();
+  }
+  show();
+  openModal('Memorização · revisão',wrap);
+}
+
+/* ================= AULA AO VIVO ================= */
+function renderLive(){
+  $('btnLive').classList.toggle('hidden',!isAdmin());
+  $('btnLive').classList.toggle('primary',!!live.on);
+  const bn=$('liveBanner');
+  if(live.on&&!isAdmin()){
+    bn.classList.remove('hidden');
+    bn.innerHTML=`<b>📡 Aula ao vivo</b> O professor está em Juízes ${live.c}:${live.v}.`;
+    const b=document.createElement('button'); b.className='btn'+(follow?'':' primary');
+    b.textContent=follow?'Parar de acompanhar':'Acompanhar';
+    b.style.marginLeft='auto';
+    b.onclick=()=>{ follow=!follow; renderLive(); if(follow){ cur=live.c; showView('read'); goTo(live.c,live.v); } };
+    bn.appendChild(b);
+  } else bn.classList.add('hidden');
+}
+$('btnLive').onclick=async()=>{
+  if(!isAdmin())return;
+  try{
+    await setDoc(doc(db,'aovivo','jz'),{on:!live.on,c:cur,v:1});
+    toast(live.on?'Aula ao vivo encerrada.':'Aula ao vivo iniciada: os versículos que você abrir aparecem para a turma.');
+  }catch(e){ toast('Falha ao alternar o modo ao vivo.'); }
+};
+
+/* ================= DENÚNCIAS ================= */
+async function reportComment(cm,c,v){
+  const motivo=prompt('Por que você está denunciando este comentário? (opcional)')||'';
+  try{
+    await addDoc(DEN,{b:'jz',commentId:cm.id,c,v,text:cm.text.slice(0,300),author:cm.author||'',
+      uid:user.uid,motivo:motivo.slice(0,300),ts:serverTimestamp()});
+    toast('Denúncia enviada ao professor.');
+  }catch(e){ toast('Falha ao enviar denúncia.'); }
 }
 
 /* ================= LINKS DE ESTUDO ================= */
@@ -481,6 +1215,310 @@ function sermonLinks(c){
   ];
 }
 
+const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+/* ================= LÉXICO CLICÁVEL ================= */
+const LOWTERMS=new Set(['efode','nazireu','levita','concubina','terafins','profetisa','holocausto','baalins','astarotes']);
+function lexify(el,text){
+  const re=/[A-Za-zÀ-ÖØ-öø-ÿ]+(?:-[A-Za-zÀ-ÖØ-öø-ÿ]+)*/g;
+  let last=0,m;
+  while((m=re.exec(text))!==null){
+    const w=m[0],k=norm(w);
+    const e=LEXICON[k];
+    const ok=e && (e.s ? e.s.includes(w) : (LOWTERMS.has(k) || /^[A-ZÀ-Ý]/.test(w)));
+    if(ok){
+      if(m.index>last) el.append(text.slice(last,m.index));
+      const b=document.createElement('button');
+      b.type='button'; b.className='lex'; b.textContent=w;
+      b.onclick=e=>{ e.stopPropagation(); lexPopup(k); };
+      el.append(b);
+      last=m.index+w.length;
+    }
+  }
+  el.append(text.slice(last));
+}
+function lexPopup(k){
+  const e=LEXICON[k];
+  const wrap=document.createElement('div');
+  const p=document.createElement('p'); p.className='lexdef'; p.textContent=e.d;
+  const links=document.createElement('div'); links.className='lexlinks';
+  const wiki=document.createElement('a');
+  wiki.href='https://pt.wikipedia.org/w/index.php?search='+encodeURIComponent(e.t);
+  wiki.target='_blank'; wiki.rel='noopener'; wiki.textContent='📖 Wikipédia (artigo e mapas)';
+  links.appendChild(wiki);
+  if(e.g){
+    const img=document.createElement('a');
+    img.href='https://www.google.com/search?tbm=isch&q='+encodeURIComponent(e.t+' bíblia arqueologia');
+    img.target='_blank'; img.rel='noopener'; img.textContent='🏺 Imagens e arqueologia';
+    links.appendChild(img);
+    const map=document.createElement('a');
+    map.href='https://www.google.com/maps/search/'+encodeURIComponent('Tel '+e.t+' Israel');
+    map.target='_blank'; map.rel='noopener'; map.textContent='🗺 Ver no mapa';
+    links.appendChild(map);
+  }
+  const hint=document.createElement('div'); hint.className='lexhint';
+  hint.textContent='Definição resumida deste app; confirme detalhes nas fontes.';
+  wrap.append(p,links,hint);
+  openModal(e.t,wrap);
+}
+
+/* ================= MODAL ================= */
+function openModal(title,node){
+  closeModal();
+  const ov=document.createElement('div'); ov.className='overlay'; ov.id='ov';
+  ov.innerHTML=`<div class="modal" role="dialog">
+    <div class="mhead"><h3></h3><button aria-label="Fechar">✕</button></div>
+    <div class="mbody"></div></div>`;
+  ov.querySelector('h3').textContent=title;
+  ov.querySelector('.mbody').appendChild(node);
+  ov.querySelector('.mhead button').onclick=closeModal;
+  ov.addEventListener('click',e=>{ if(e.target===ov)closeModal(); });
+  document.body.appendChild(ov);
+}
+function closeModal(){ const o=$('ov'); if(o)o.remove(); }
+function goTo(c,v){
+  closeModal(); cur=c; showView('read');
+  requestAnimationFrame(()=>{
+    const div=document.querySelector(`.verse[data-v="${v}"]`);
+    if(div){ div.querySelector('.verse-row').click(); div.scrollIntoView({block:'center'}); }
+  });
+}
+
+/* ================= BUSCA ================= */
+$('btnSearch').onclick=()=>{
+  const wrap=document.createElement('div');
+  wrap.innerHTML=`<div class="searchbar"><input id="sq" placeholder="Buscar no texto e nos comentários…"></div>
+    <div class="mhint">Digite ao menos 3 letras.</div><ul class="mlist" id="sres"></ul>`;
+  openModal('Buscar',wrap);
+  const inp=wrap.querySelector('#sq'), res=wrap.querySelector('#sres');
+  inp.focus();
+  inp.addEventListener('input',()=>{
+    const q=norm(inp.value.trim()); res.innerHTML='';
+    if(q.length<3)return;
+    let hits=0;
+    for(let c=1;c<=21&&hits<25;c++){
+      BOOK.chapters[c-1].forEach((t,i)=>{
+        if(hits>=25)return;
+        if(norm(t).includes(q)){
+          hits++;
+          const li=document.createElement('li');
+          li.innerHTML=`<span class="ref">${c}:${i+1}</span><span class="txt"></span><button class="go">abrir</button>`;
+          li.querySelector('.txt').textContent=t.length>140?t.slice(0,140)+'…':t;
+          li.querySelector('.go').onclick=()=>goTo(c,i+1);
+          res.appendChild(li);
+        }
+      });
+    }
+    let ch=0;
+    for(const k in all){
+      if(ch>=25)break;
+      const parts=k.split(':'), c=+parts[0], v=+parts[1];
+      all[k].forEach(cm=>{
+        if(ch>=25)return;
+        if(norm(cm.text).includes(q)||norm(cm.author||'').includes(q)){
+          ch++;
+          const li=document.createElement('li');
+          li.innerHTML=`<span class="ref">${c}:${v===0?'P':v}</span><span class="txt"><b></b></span><button class="go">abrir</button>`;
+          li.querySelector('b').textContent=(cm.author||'')+': ';
+          li.querySelector('.txt').append(cm.text.length>120?cm.text.slice(0,120)+'…':cm.text);
+          li.querySelector('.go').onclick=()=>goTo(c,Math.max(v,1));
+          res.appendChild(li);
+        }
+      });
+    }
+    if(!res.children.length) res.innerHTML='<li><span class="txt" style="color:var(--ink-soft)">Nada encontrado.</span></li>';
+  });
+};
+
+/* ================= DESTAQUES (modal) ================= */
+$('btnFavs').onclick=()=>{
+  const ul=document.createElement('ul'); ul.className='mlist';
+  const items=[...favs.keys()].map(k=>k.split(':').map(Number)).sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+  if(!items.length) ul.innerHTML='<li><span class="txt" style="color:var(--ink-soft)">Você ainda não destacou versículos. Abra um versículo e toque em ☆ Destacar.</span></li>';
+  items.forEach(([c,v])=>{
+    const t=BOOK.chapters[c-1][v-1]||'';
+    const li=document.createElement('li');
+    const col=favs.get(c+':'+v)||'y';
+    li.innerHTML=`<span class="ref">${c}:${v}</span><span class="cdot" style="background:${FCOLORS[col]};align-self:center"></span><span class="txt"></span><button class="go">abrir</button>`;
+    li.querySelector('.txt').textContent=t.length>150?t.slice(0,150)+'…':t;
+    li.querySelector('.go').onclick=()=>goTo(c,v);
+    ul.appendChild(li);
+  });
+  const leg=document.createElement('div'); leg.className='mhint'; leg.style.marginTop='10px';
+  leg.textContent=Object.values(FLABELS).join('  ·  ');
+  const box=document.createElement('div'); box.append(ul,leg);
+  openModal('Meus destaques',box);
+};
+
+/* ================= GAMIFICAÇÃO ================= */
+function flatComments(){
+  const out=[];
+  for(const k in all){
+    const parts=k.split(':'), c=+parts[0], v=+parts[1];
+    all[k].forEach(cm=>out.push(Object.assign({c,v},cm)));
+  }
+  return out;
+}
+const BADGES=[
+  {e:'🌱',n:'Primeiro passo',d:'Publicou o 1º comentário',f:s=>s.total>=1},
+  {e:'✍️',n:'Escriba',d:'10 comentários publicados',f:s=>s.total>=10},
+  {e:'💬',n:'Dialogador',d:'5 respostas a colegas',f:s=>s.replies>=5},
+  {e:'🙏',n:'Edificador',d:'10 améns recebidos',f:s=>s.amens>=10},
+  {e:'🔥',n:'Constância',d:'Comentou em 7 dias diferentes',f:s=>s.days>=7},
+  {e:'📖',n:'Capítulo completo',d:'Comentou todos os versículos de um capítulo',f:s=>s.fullChapter}
+];
+function userStats(){
+  const flat=flatComments(), stats={};
+  flat.forEach(cm=>{
+    const s=stats[cm.uid]=stats[cm.uid]||{name:cm.author,total:0,replies:0,amens:0,daySet:new Set(),perChap:{},last:0};
+    s.name=cm.author||s.name;
+    s.total++;
+    if(cm.parent)s.replies++;
+    s.amens+=likes[cm.id]?likes[cm.id].size:0;
+    s.daySet.add(new Date(cm.ts).toDateString());
+    if(cm.v>=1)(s.perChap[cm.c]=s.perChap[cm.c]||new Set()).add(cm.v);
+    s.last=Math.max(s.last,cm.ts);
+  });
+  for(const uid in stats){
+    const s=stats[uid];
+    s.days=s.daySet.size;
+    s.fullChapter=Object.entries(s.perChap).some(([c,set])=>set.size>=BOOK.chapters[c-1].length);
+    s.score=s.total*2+s.amens;
+  }
+  return stats;
+}
+$('btnRank').onclick=()=>{
+  const stats=userStats();
+  const wrap=document.createElement('div');
+  const mine=stats[user.uid]||{total:0,replies:0,amens:0,days:0,fullChapter:false,score:0};
+  const mb=document.createElement('div');
+  mb.innerHTML='<div class="mhint">Seus selos</div>';
+  const grid=document.createElement('div'); grid.className='mybadges';
+  BADGES.forEach(b=>{
+    const has=b.f(mine);
+    const d=document.createElement('div'); d.className='mybadge'+(has?'':' off');
+    d.innerHTML=`<b>${b.e}</b><span><b style="font-size:12.5px">${b.n}</b><br><span style="color:var(--ink-soft);font-size:11px">${b.d}</span></span>`;
+    grid.appendChild(d);
+  });
+  mb.appendChild(grid);
+  const rk=document.createElement('div');
+  rk.innerHTML='<div class="mhint">Ranking de participação (2 pontos por comentário + 1 por amém recebido)</div>';
+  const ol=document.createElement('ol'); ol.className='rank';
+  Object.entries(stats).sort((a,b)=>b[1].score-a[1].score).slice(0,20).forEach(([uid,s])=>{
+    const li=document.createElement('li');
+    const bs=BADGES.filter(b=>b.f(s)).map(b=>b.e).join('');
+    li.innerHTML=`<span class="rname"></span><span class="rbadges">${bs}</span><span class="rscore">${s.score} pts</span>`;
+    li.querySelector('.rname').textContent=s.name+(uid===user.uid?' (você)':'');
+    ol.appendChild(li);
+  });
+  if(!ol.children.length) ol.innerHTML='<li><span class="rname" style="color:var(--ink-soft)">Ainda sem participações.</span></li>';
+  rk.appendChild(ol);
+  wrap.append(mb,rk);
+  openModal('Turma e selos',wrap);
+};
+
+/* ================= PAINEL DO PROFESSOR ================= */
+$('btnProf').onclick=()=>{
+  if(!isAdmin())return;
+  const stats=userStats();
+  const wrap=document.createElement('div');
+
+  const dh=document.createElement('div');
+  dh.innerHTML=`<div class="mhint">Denúncias pendentes (${denuncias.length})</div>`;
+  denuncias.forEach(d=>{
+    const box=document.createElement('div'); box.className='den';
+    box.innerHTML=`<div class="dref">Jz ${d.c}:${d.v===0?'Pergunta':d.v} · autor: <span class="da"></span></div>
+      <div class="dtxt"></div>
+      <div style="font-size:11.5px;color:var(--ink-soft);margin-bottom:6px">Motivo: <span class="dm"></span></div>
+      <div class="dacts"><button class="btn">Ver no texto</button><button class="btn">Apagar comentário</button><button class="btn">Descartar denúncia</button></div>`;
+    box.querySelector('.da').textContent=d.author||'?';
+    box.querySelector('.dtxt').textContent=d.text||'';
+    box.querySelector('.dm').textContent=d.motivo||'(não informado)';
+    const btns=box.querySelectorAll('.dacts .btn');
+    btns[0].onclick=()=>goTo(d.c,Math.max(d.v,1));
+    btns[1].onclick=async()=>{
+      if(!confirm('Apagar o comentário denunciado?'))return;
+      try{ await deleteDoc(doc(db,'comentarios',d.commentId)); await deleteDoc(doc(db,'denuncias',d.id)); toast('Comentário apagado.'); box.remove(); }
+      catch(e){ toast('Falha ao apagar.'); }
+    };
+    btns[2].onclick=async()=>{
+      try{ await deleteDoc(doc(db,'denuncias',d.id)); box.remove(); }catch(e){}
+    };
+    dh.appendChild(box);
+  });
+  if(!denuncias.length) dh.innerHTML+='<div style="font-size:13px;color:var(--ink-soft);margin-bottom:12px">Nenhuma denúncia. 🙂</div>';
+
+  const pt=document.createElement('div');
+  pt.innerHTML='<div class="mhint" style="margin-top:14px">Participação por aluno</div>';
+  const tbl=document.createElement('table'); tbl.className='tbl';
+  tbl.innerHTML='<thead><tr><th>Aluno</th><th>Coment.</th><th>Resp.</th><th>Améns</th><th>Dias</th><th>Último</th></tr></thead>';
+  const tb=document.createElement('tbody');
+  Object.values(stats).sort((a,b)=>b.total-a.total).forEach(s=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td></td><td>${s.total}</td><td>${s.replies}</td><td>${s.amens}</td><td>${s.days}</td>
+      <td>${new Date(s.last).toLocaleDateString('pt-BR')}</td>`;
+    tr.querySelector('td').textContent=s.name||'?';
+    tb.appendChild(tr);
+  });
+  tbl.appendChild(tb); pt.appendChild(tbl);
+
+  const tv=document.createElement('div');
+  tv.innerHTML='<div class="mhint" style="margin-top:14px">Versículos mais comentados</div>';
+  const ul=document.createElement('ul'); ul.className='mlist';
+  Object.entries(all).filter(([k])=>!k.endsWith(':0'))
+    .sort((a,b)=>b[1].length-a[1].length).slice(0,5).forEach(([k,arr])=>{
+    const parts=k.split(':'), c=+parts[0], v=+parts[1];
+    const li=document.createElement('li');
+    li.innerHTML=`<span class="ref">${c}:${v}</span><span class="txt">${arr.length} comentários</span><button class="go">abrir</button>`;
+    li.querySelector('.go').onclick=()=>goTo(c,v);
+    ul.appendChild(li);
+  });
+  tv.appendChild(ul);
+
+  const ex=document.createElement('button'); ex.className='btn'; ex.style.marginTop='14px';
+  ex.textContent='Exportar participação (CSV)';
+  ex.onclick=()=>{
+    let csv='aluno;comentarios;respostas;amens_recebidos;dias_ativos;ultimo_comentario\n';
+    Object.values(stats).sort((a,b)=>b.total-a.total).forEach(s=>{
+      csv+=`"${(s.name||'').replace(/"/g,'""')}";${s.total};${s.replies};${s.amens};${s.days};${new Date(s.last).toLocaleDateString('pt-BR')}\n`;
+    });
+    download(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),'participacao-juizes.csv');
+  };
+
+  wrap.append(dh,pt,tv,ex);
+  openModal('Painel do professor',wrap);
+};
+
+/* ================= CARD DE IMAGEM ================= */
+async function makeCard(c,v,text){
+  try{ await document.fonts.load('600 60px Fraunces'); await document.fonts.load('400 44px "Source Serif 4"'); }catch(e){}
+  const W=1080,H=1350, cv=document.createElement('canvas');
+  cv.width=W; cv.height=H;
+  const x=cv.getContext('2d');
+  x.fillStyle='#FBFAF6'; x.fillRect(0,0,W,H);
+  x.fillStyle='#3E4A31'; x.fillRect(0,0,W,150);
+  x.fillStyle='#E8E2D2'; x.font='600 34px Inter, sans-serif';
+  x.textBaseline='middle';
+  x.fillText('LIVRO DE JUÍZES · ALMEIDA',64,76);
+  x.fillStyle='#9C7A3C'; x.font='700 84px Fraunces, Georgia, serif';
+  x.textBaseline='alphabetic';
+  x.fillText(`Juízes ${c}:${v}`,64,300);
+  x.fillStyle='#2B2E26'; x.font='400 46px "Source Serif 4", Georgia, serif';
+  const words=text.split(/\s+/), lines=[]; let line='';
+  words.forEach(w=>{
+    const t=line?line+' '+w:w;
+    if(x.measureText(t).width>W-128){ lines.push(line); line=w; } else line=t;
+  });
+  if(line)lines.push(line);
+  const shown=lines.slice(0,12);
+  if(lines.length>12) shown[11]=shown[11].replace(/\s+\S*$/,'')+'…';
+  shown.forEach((l,i)=>x.fillText(l,64,390+i*68));
+  x.strokeStyle='#9C7A3C'; x.lineWidth=3;
+  x.beginPath(); x.moveTo(64,H-140); x.lineTo(W-64,H-140); x.stroke();
+  x.fillStyle='#5B5F52'; x.font='500 30px Inter, sans-serif';
+  x.fillText('Juízes comentado · EBD Jovens',64,H-84);
+  cv.toBlob(b=>{ download(b,`juizes-${c}-${v}.png`); toast('Card gerado.'); },'image/png');
+}
+
 /* ================= RENDER ================= */
 function fmtWhen(ts){
   try{ return new Date(ts).toLocaleDateString('pt-BR',{day:'2-digit',month:'short'})+' '+
@@ -498,78 +1536,36 @@ function allCount(){ let n=0; for(const k in all)n+=all[k].length; return n; }
 
 function renderSidebar(){
   const grid=$('chapGrid'); grid.innerHTML='';
+  const wk=PLAN[currentWeek()].chapters;
   BOOK.chapters.forEach((ch,i)=>{
     const c=i+1,{versesWith}=chapCounts(c);
     const b=document.createElement('button');
-    b.className='chap-btn'+(c===cur?' active':'')+(versesWith>0?' has':'');
+    b.className='chap-btn'+(c===cur?' active':'')+(versesWith>0?' has':'')+(wk.includes(c)?' week':'');
     b.innerHTML=`<span class="n">${c}</span><span class="c">${versesWith}/${ch.length}</span>`;
     b.onclick=()=>{ cur=c; renderAll(); document.querySelector('.main').scrollTop=0; };
     grid.appendChild(b);
   });
   $('overall').innerHTML=`<b>${allCount()}</b> comentários da turma`;
 }
-function renderChapter(keepOpen){
-  const openV=keepOpen?(document.querySelector('.verse.open')||{}).dataset?.v:null;
-  const wrap=$('verses'); wrap.innerHTML='';
-  const verses=BOOK.chapters[cur-1];
-  const {versesWith,total}=chapCounts(cur);
-  $('chapTitle').textContent='Capítulo '+cur;
-  $('chapStat').textContent=`${versesWith} de ${verses.length} versículos · ${total} comentários`;
 
-  // pregações do capítulo
-  const det=document.createElement('details'); det.className='sermons';
-  det.innerHTML=`<summary>Pregações recomendadas sobre Juízes ${cur}</summary>
-    <div class="body"><div class="note">Buscas prontas no YouTube com pregadores renomados sobre este capítulo.</div>
-    <div class="links"></div></div>`;
-  const lk=det.querySelector('.links');
-  sermonLinks(cur).forEach(([n,u])=>{
-    const a=document.createElement('a'); a.href=u; a.target='_blank'; a.rel='noopener'; a.textContent=n;
-    lk.appendChild(a);
-  });
-  wrap.appendChild(det);
-
-  verses.forEach((text,i)=>{
-    const v=i+1,vkey=cur+':'+v,arr=all[vkey]||[];
-    const div=document.createElement('div'); div.className='verse'; div.dataset.v=v;
-    const row=document.createElement('div');
-    row.className='verse-row'; row.setAttribute('role','button'); row.setAttribute('tabindex','0');
-    const num=document.createElement('span'); num.className='vnum'; num.textContent=v;
-    const vt=document.createElement('span'); vt.className='vtext'; vt.textContent=text;
-    row.append(num,vt);
-    if(arr.length){
-      const bd=document.createElement('span'); bd.className='badge';
-      bd.textContent=arr.length+(arr.some(cm=>cm.uid===user.uid)?' ✦':'');
-      row.appendChild(bd);
-    }
-    const panel=document.createElement('div'); panel.className='panel';
-    const toggle=()=>{
-      const was=div.classList.contains('open');
-      document.querySelectorAll('.verse.open').forEach(o=>o.classList.remove('open'));
-      if(!was){ div.classList.add('open'); buildPanel(panel,vkey,cur,v); }
-    };
-    row.addEventListener('click',toggle);
-    row.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();} });
-    div.append(row,panel);
-    wrap.appendChild(div);
-    if(openV&&String(v)===String(openV)){ div.classList.add('open'); buildPanel(panel,vkey,cur,v); }
-  });
-  $('prevChap').disabled=cur<=1;
-  $('nextChap').disabled=cur>=21;
-}
-
-function commentBox(cm,panel,vkey,c,v,isReply){
+function commentBox(cm,rerender,c,v,isReply){
   const box=document.createElement('div');
   box.className='comment'+(cm.uid===user.uid?' mine':'')+(isReply?' reply':'');
   const head=document.createElement('div'); head.className='head';
   const who=document.createElement('span'); who.className='who';
   who.textContent=(cm.author||'Anônimo')+(cm.uid===user.uid?' (você)':'');
+  head.appendChild(who);
+  if(cm.prof){
+    const pb=document.createElement('span'); pb.className='prof-badge'; pb.textContent='Professor';
+    head.appendChild(pb);
+  }
   const when=document.createElement('span'); when.className='when'; when.textContent=fmtWhen(cm.ts);
-  head.append(who,when);
+  head.appendChild(when);
   if(cm.uid===user.uid||isAdmin()){
     const acts=document.createElement('span'); acts.className='acts';
     if(cm.uid===user.uid){
       const ed=document.createElement('button'); ed.textContent='Editar';
-      ed.onclick=()=>startEdit(panel,vkey,c,v,cm);
+      ed.onclick=()=>startEdit(cm);
       acts.appendChild(ed);
     }
     const del=document.createElement('button'); del.textContent='Apagar';
@@ -582,20 +1578,24 @@ function commentBox(cm,panel,vkey,c,v,isReply){
     head.appendChild(acts);
   }
   const body=document.createElement('div'); body.className='body'; body.textContent=cm.text;
-
   const cfoot=document.createElement('div'); cfoot.className='cfoot';
   const amem=document.createElement('button'); amem.className='amem'; amem.dataset.id=cm.id;
   amem.onclick=()=>toggleLike(cm);
   cfoot.appendChild(amem);
   if(!isReply){
     const rep=document.createElement('button'); rep.textContent='↩ Responder';
-    rep.onclick=()=>openReply(box,cm,vkey,c,v);
+    rep.onclick=()=>openReply(box,cm,c,v);
     cfoot.appendChild(rep);
+  }
+  if(cm.uid!==user.uid){
+    const fl=document.createElement('button'); fl.textContent='⚑ Denunciar';
+    fl.onclick=()=>reportComment(cm,c,v);
+    cfoot.appendChild(fl);
   }
   box.append(head,body,cfoot);
   return box;
 }
-function openReply(afterBox,parentCm,vkey,c,v){
+function openReply(afterBox,parentCm,c,v){
   const old=document.querySelector('.reply-box'); if(old)old.remove();
   const comp=document.createElement('div'); comp.className='composer reply-box';
   const ta=document.createElement('textarea');
@@ -607,9 +1607,9 @@ function openReply(afterBox,parentCm,vkey,c,v){
     const text=ta.value.trim(); if(!text)return;
     send.disabled=true;
     try{
-      await addDoc(COL,{b:'jz',c,v,uid:user.uid,author:user.displayName||user.email,
-        text,parent:parentCm.id,ts:serverTimestamp()});
-      toast('Resposta publicada.');
+      const data={b:'jz',c,v,uid:user.uid,author:user.displayName||user.email,text,parent:parentCm.id,ts:serverTimestamp()};
+      if(isAdmin())data.prof=true;
+      await addDoc(COL,data); toast('Resposta publicada.');
     }catch(e){ toast('Falha ao publicar resposta.'); send.disabled=false; }
   };
   cancel.onclick=()=>comp.remove();
@@ -618,45 +1618,274 @@ function openReply(afterBox,parentCm,vkey,c,v){
   afterBox.after(comp);
   ta.focus();
 }
-function buildPanel(panel,vkey,c,v){
-  panel.innerHTML='';
+function buildThread(container,vkey,c,v,placeholder){
+  container.innerHTML='';
   const arr=all[vkey]||[];
   const ids=new Set(arr.map(x=>x.id));
   const tops=arr.filter(x=>!x.parent||!ids.has(x.parent));
   const kidsOf=id=>arr.filter(x=>x.parent===id);
+  const rerender=()=>buildThread(container,vkey,c,v,placeholder);
 
   if(!arr.length){
     const e=document.createElement('div'); e.className='empty';
-    e.textContent='Ninguém comentou este versículo ainda. Seja o primeiro.';
-    panel.appendChild(e);
+    e.textContent=v===0?'Ninguém respondeu ainda. Seja o primeiro.':'Ninguém comentou este versículo ainda. Seja o primeiro.';
+    container.appendChild(e);
   }
   tops.forEach(cm=>{
-    panel.appendChild(commentBox(cm,panel,vkey,c,v,false));
-    kidsOf(cm.id).forEach(r=>panel.appendChild(commentBox(r,panel,vkey,c,v,true)));
+    container.appendChild(commentBox(cm,rerender,c,v,false));
+    kidsOf(cm.id).forEach(r=>container.appendChild(commentBox(r,rerender,c,v,true)));
   });
 
   const comp=document.createElement('div'); comp.className='composer';
-  const ta=document.createElement('textarea');
-  ta.placeholder='Escreva seu comentário sobre Juízes '+c+':'+v+'…';
+  const ta=document.createElement('textarea'); ta.placeholder=placeholder;
+  if(v>=1){
+    const chips=document.createElement('div'); chips.className='chips';
+    [['🔍 Observação','🔍 Observação: '],['💡 Interpretação','💡 Interpretação: '],
+     ['🎯 Aplicação','🎯 Aplicação: '],['🙏 Oração','🙏 Oração: ']].forEach(([l,pfx])=>{
+      const b=document.createElement('button'); b.type='button'; b.textContent=l;
+      b.onclick=()=>{ ta.value+=(ta.value&&!ta.value.endsWith('\n')?'\n':'')+pfx; ta.focus(); };
+      chips.appendChild(b);
+    });
+    comp.appendChild(chips);
+  }
   const foot=document.createElement('div'); foot.className='foot';
-  const send=document.createElement('button'); send.className='btn primary'; send.textContent='Publicar comentário';
+  const send=document.createElement('button'); send.className='btn primary';
+  send.textContent=v===0?'Responder à pergunta':'Publicar comentário';
   const note=document.createElement('span'); note.className='note'; note.textContent='Visível para toda a turma.';
   send.onclick=async()=>{
     const text=ta.value.trim(); if(!text)return;
-    send.disabled=true; send.textContent='Publicando…';
+    send.disabled=true;
     try{
-      await addDoc(COL,{b:'jz',c,v,uid:user.uid,author:user.displayName||user.email,text,ts:serverTimestamp()});
-      ta.value=''; toast('Comentário publicado.');
-    }catch(e){ toast('Falha ao publicar. Verifique a conexão.'); }
-    send.disabled=false; send.textContent='Publicar comentário';
+      const data={b:'jz',c,v,uid:user.uid,author:user.displayName||user.email,text,ts:serverTimestamp()};
+      if(isAdmin())data.prof=true;
+      await addDoc(COL,data);
+      ta.value=''; toast('Publicado.');
+    }catch(e){ toast('Falha ao publicar.'); }
+    send.disabled=false;
   };
   foot.append(send,note);
   comp.append(ta,foot);
-  panel.appendChild(comp);
+  container.appendChild(comp);
+  refreshLikeButtons();
+}
+
+function renderChapter(keepOpen){
+  const openV=keepOpen?(document.querySelector('.verse.open')||{}).dataset?.v:null;
+  const wrap=$('verses'); wrap.innerHTML='';
+  const verses=BOOK.chapters[cur-1];
+  const {versesWith,total}=chapCounts(cur);
+  $('chapTitle').textContent='Capítulo '+cur;
+  $('chapStat').textContent=`${versesWith} de ${verses.length} versículos · ${total} comentários`;
+  try{ localStorage.setItem('jz_last',cur); }catch(e){}
+  if(speakingChap&&speakingChap!==cur) stopAudio();
+
+  const qtext=perguntas[cur];
+  if(qtext||isAdmin()){
+    const q=document.createElement('div'); q.className='qcard';
+    const tag=document.createElement('div'); tag.className='tag';
+    tag.textContent='Pergunta do professor';
+    if(isAdmin()){
+      const ed=document.createElement('button'); ed.textContent=qtext?'editar':'criar pergunta';
+      ed.onclick=async()=>{
+        const nt=prompt('Pergunta norteadora do capítulo '+cur+':',qtext||'');
+        if(nt===null)return;
+        try{
+          if(nt.trim()) await setDoc(doc(db,'perguntas','jz_'+cur),{b:'jz',c:cur,text:nt.trim()});
+          else await deleteDoc(doc(db,'perguntas','jz_'+cur));
+        }catch(e){ toast('Falha ao salvar pergunta.'); }
+      };
+      tag.appendChild(ed);
+    }
+    q.appendChild(tag);
+    if(qtext){
+      const qt=document.createElement('div'); qt.className='qtext'; qt.textContent=qtext;
+      const thread=document.createElement('div'); thread.className='qthread';
+      q.append(qt,thread);
+      buildThread(thread,cur+':0',cur,0,'Sua resposta à pergunta…');
+    } else if(isAdmin()){
+      const qt=document.createElement('div'); qt.className='qtext';
+      qt.style.color='var(--ink-soft)'; qt.textContent='Sem pergunta neste capítulo ainda.';
+      q.appendChild(qt);
+    }
+    wrap.appendChild(q);
+  }
+
+  const det=document.createElement('details'); det.className='ccard';
+  det.innerHTML=`<summary>Pregações recomendadas sobre Juízes ${cur}</summary>
+    <div class="body"><div class="note">Buscas prontas no YouTube com pregadores renomados sobre este capítulo.</div>
+    <div class="links"></div></div>`;
+  const lk=det.querySelector('.links');
+  sermonLinks(cur).forEach(([n,u])=>{
+    const a=document.createElement('a'); a.href=u; a.target='_blank'; a.rel='noopener'; a.className='yt'; a.textContent=n;
+    lk.appendChild(a);
+  });
+  wrap.appendChild(det);
+
+  const gl=GLOSSARY[cur]||[];
+  if(gl.length){
+    const g=document.createElement('details'); g.className='ccard';
+    g.innerHTML=`<summary>Glossário hebraico do capítulo</summary>
+      <div class="body"><div class="note">Transliterações aproximadas; confira grafia e vocalização no interlinear.</div></div>`;
+    const gb=g.querySelector('.body');
+    gl.forEach(([term,def])=>{
+      const it=document.createElement('div'); it.className='gloss-item';
+      it.innerHTML=`<div class="term"></div><div class="def"></div>`;
+      it.querySelector('.term').textContent=term;
+      it.querySelector('.def').textContent=def;
+      gb.appendChild(it);
+    });
+    wrap.appendChild(g);
+  }
+
+  // quiz do capítulo
+  const QZ=QUIZ[cur]||[];
+  if(QZ.length){
+    const qz=document.createElement('details'); qz.className='ccard quiz';
+    let best=null; try{ best=localStorage.getItem('jz_quiz_'+cur); }catch(e){}
+    qz.innerHTML=`<summary>Quiz do capítulo${best!==null?' · melhor: '+best+'/'+QZ.length:''}</summary><div class="body"></div>`;
+    const qb=qz.querySelector('.body');
+    let score=0, answered=0;
+    QZ.forEach((item,qi)=>{
+      const qq=document.createElement('div'); qq.className='qq'; qq.textContent=(qi+1)+'. '+item.q;
+      const opts=document.createElement('div'); opts.className='opts';
+      item.o.forEach((op,oi)=>{
+        const b=document.createElement('button'); b.textContent=op;
+        b.onclick=()=>{
+          if(b.disabled)return;
+          [...opts.children].forEach(x=>x.disabled=true);
+          answered++;
+          if(oi===item.a){ b.classList.add('ok'); score++; }
+          else{ b.classList.add('err'); opts.children[item.a].classList.add('ok'); }
+          if(answered===QZ.length){
+            const sc=document.createElement('div'); sc.className='qscore';
+            sc.textContent='Resultado: '+score+' de '+QZ.length+(score===QZ.length?' 🎉':'');
+            qb.appendChild(sc);
+            try{
+              const prev=parseInt(localStorage.getItem('jz_quiz_'+cur));
+              if(isNaN(prev)||score>prev) localStorage.setItem('jz_quiz_'+cur,score);
+            }catch(e){}
+          }
+        };
+        opts.appendChild(b);
+      });
+      qb.append(qq,opts);
+    });
+    wrap.appendChild(qz);
+  }
+
+  // roteiro de estudo indutivo
+  const ind=document.createElement('details'); ind.className='ccard';
+  ind.innerHTML=`<summary>Roteiro de estudo indutivo</summary>
+    <div class="body">
+      <div class="gloss-item"><div class="term">🔍 Observação</div><div class="def">O que o texto diz? Personagens, lugares, repetições, contrastes ("mas"), causas ("porque"). Ainda não interprete: só enxergue.</div></div>
+      <div class="gloss-item"><div class="term">💡 Interpretação</div><div class="def">O que significava para o primeiro leitor? O que revela sobre Deus? Use as palavras sublinhadas, o glossário e o interlinear.</div></div>
+      <div class="gloss-item"><div class="term">🎯 Aplicação</div><div class="def">O que eu faço com isso esta semana? Aplicação boa tem verbo e prazo.</div></div>
+      <div class="note" style="margin:8px 0 0">Ao comentar um versículo, use os botões Observação / Interpretação / Aplicação / Oração para estruturar sua resposta. Guia completo na aba 🧭 Como estudar.</div>
+    </div>`;
+  wrap.appendChild(ind);
+
+  // devocional privado do capítulo
+  const dv=document.createElement('details'); dv.className='ccard devo';
+  dv.innerHTML=`<summary>🙏 Meu devocional deste capítulo (privado)</summary>
+    <div class="body">
+      <div class="note">Só você vê o que escreve aqui. Leia, medite e ore.</div>
+      <label>O que Deus me mostrou (meditação)</label>
+      <textarea class="dmed" placeholder="Um versículo que falou comigo hoje foi…"></textarea>
+      <label>Minha oração</label>
+      <textarea class="dora" placeholder="Senhor, diante deste capítulo eu…"></textarea>
+      <div class="dfoot"><button class="btn primary dsave">Salvar devocional</button><span class="dstate"></span></div>
+    </div>`;
+  const dmed=dv.querySelector('.dmed'), dora=dv.querySelector('.dora'), dst=dv.querySelector('.dstate');
+  const dd=dev[cur]||{med:'',ora:''};
+  dmed.value=dd.med; dora.value=dd.ora;
+  dv.querySelector('.dsave').onclick=async()=>{
+    dst.textContent='Salvando…';
+    try{
+      await setDoc(doc(db,'devocionais','jz_'+cur+'_'+user.uid),
+        {b:'jz',c:cur,uid:user.uid,med:dmed.value.slice(0,5000),ora:dora.value.slice(0,5000)});
+      dst.textContent='Salvo ✓';
+    }catch(e){ dst.textContent='Falha ao salvar.'; }
+  };
+  wrap.appendChild(dv);
+
+  verses.forEach((text,i)=>{
+    const v=i+1,vkey=cur+':'+v,arr=all[vkey]||[];
+    const div=document.createElement('div');
+    div.className='verse'; div.dataset.v=v; paintFav(div,vkey);
+    const row=document.createElement('div');
+    row.className='verse-row'; row.setAttribute('role','button'); row.setAttribute('tabindex','0');
+    const num=document.createElement('span'); num.className='vnum'; num.textContent=v;
+    const vt=document.createElement('span'); vt.className='vtext'; lexify(vt,text);
+    row.append(num,vt);
+    if(arr.length){
+      const bd=document.createElement('span'); bd.className='badge';
+      bd.textContent=arr.length+(arr.some(cm=>cm.uid===user.uid)?' ✦':'');
+      row.appendChild(bd);
+    }
+    const panel=document.createElement('div'); panel.className='panel';
+    const toggle=()=>{
+      const was=div.classList.contains('open');
+      document.querySelectorAll('.verse.open').forEach(o=>o.classList.remove('open'));
+      if(!was){
+        div.classList.add('open'); buildVersePanel(panel,vkey,cur,v,text);
+        try{ history.replaceState(null,'','#/'+cur+'/'+v); }catch(e){}
+        if(isAdmin()&&live.on) setDoc(doc(db,'aovivo','jz'),{on:true,c:cur,v}).catch(()=>{});
+      }
+    };
+    row.addEventListener('click',toggle);
+    row.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();} });
+    div.append(row,panel);
+    wrap.appendChild(div);
+    if(openV&&String(v)===String(openV)){ div.classList.add('open'); buildVersePanel(panel,vkey,cur,v,text); }
+  });
+  $('prevChap').disabled=cur<=1;
+  $('nextChap').disabled=cur>=21;
+}
+function buildVersePanel(panel,vkey,c,v,text){
+  panel.innerHTML='';
+  const thread=document.createElement('div');
+  panel.appendChild(thread);
+  buildThread(thread,vkey,c,v,'Escreva seu comentário sobre Juízes '+c+':'+v+'…');
 
   const refs=document.createElement('div'); refs.className='refs';
   const lbl=document.createElement('span'); lbl.className='lbl'; lbl.textContent='Estudar este versículo';
   refs.appendChild(lbl);
+
+  const fav=document.createElement('button'); fav.className='chip favchip'; fav.dataset.key=vkey;
+  fav.textContent=favs.has(vkey)?'★ Destacado':'☆ Destacar';
+  fav.classList.toggle('on',favs.has(vkey));
+  fav.onclick=()=>favPicker(c,v);
+  refs.appendChild(fav);
+
+  const memb=document.createElement('button'); memb.className='chip memchip'; memb.dataset.key=vkey;
+  memb.textContent=mem[vkey]?'🧠 Memorizando':'🧠 Memorizar';
+  memb.classList.toggle('on',!!mem[vkey]);
+  memb.onclick=()=>toggleMem(c,v);
+  refs.appendChild(memb);
+
+  const cp=document.createElement('button'); cp.className='chip';
+  cp.textContent='📋 Copiar';
+  cp.onclick=async()=>{
+    const s=`"${text}" (Juízes ${c}.${v})`;
+    try{ await navigator.clipboard.writeText(s); toast('Versículo copiado.'); }
+    catch(e){ toast('Não foi possível copiar.'); }
+  };
+  refs.appendChild(cp);
+
+  const lk2=document.createElement('button'); lk2.className='chip';
+  lk2.textContent='🔗 Copiar link';
+  lk2.onclick=async()=>{
+    const url=location.origin+location.pathname+'#/'+c+'/'+v;
+    try{ await navigator.clipboard.writeText(url); toast('Link copiado. Quem abrir cai direto neste versículo.'); }
+    catch(e){ toast('Não foi possível copiar.'); }
+  };
+  refs.appendChild(lk2);
+
+  const card=document.createElement('button'); card.className='chip';
+  card.textContent='🖼 Gerar card';
+  card.onclick=()=>makeCard(c,v,text);
+  refs.appendChild(card);
+
   refLinksPt(c,v).forEach(([n,u])=>{
     const a=document.createElement('a'); a.href=u; a.target='_blank'; a.rel='noopener'; a.textContent=n;
     refs.appendChild(a);
@@ -669,44 +1898,21 @@ function buildPanel(panel,vkey,c,v){
   panel.appendChild(refs);
   refreshLikeButtons();
 }
-function startEdit(panel,vkey,c,v,cm){
-  panel.innerHTML='';
-  const comp=document.createElement('div'); comp.className='composer';
-  const ta=document.createElement('textarea'); ta.value=cm.text;
-  const foot=document.createElement('div'); foot.className='foot';
-  const save=document.createElement('button'); save.className='btn primary'; save.textContent='Salvar edição';
-  const cancel=document.createElement('button'); cancel.className='btn'; cancel.textContent='Cancelar';
-  save.onclick=async()=>{
-    const text=ta.value.trim(); if(!text)return;
-    save.disabled=true;
-    try{ await updateDoc(doc(db,'comentarios',cm.id),{text}); toast('Comentário atualizado.'); }
-    catch(e){ toast('Sem permissão para editar.'); }
-    save.disabled=false;
-  };
-  cancel.onclick=()=>buildPanel(panel,vkey,c,v);
-  foot.append(save,cancel);
-  comp.append(ta,foot);
-  panel.appendChild(comp);
-  ta.focus();
+function startEdit(cm){
+  const nt=prompt('Editar comentário:',cm.text);
+  if(nt===null)return;
+  const text=nt.trim(); if(!text)return;
+  updateDoc(doc(db,'comentarios',cm.id),{text})
+    .then(()=>toast('Comentário atualizado.'))
+    .catch(()=>toast('Sem permissão para editar.'));
 }
-function renderAll(keepOpen){ if(!user)return; renderSidebar(); renderChapter(keepOpen); }
+function renderAll(keepOpen){ if(!user)return; renderSidebar(); renderChapter(keepOpen); renderPlan(); }
+$('bnTurma').onclick=()=>$('btnRank').click();
 $('prevChap').onclick=()=>{ if(cur>1){cur--;renderAll();document.querySelector('.main').scrollTop=0;} };
 $('nextChap').onclick=()=>{ if(cur<21){cur++;renderAll();document.querySelector('.main').scrollTop=0;} };
 
 /* ================= EXPORTAÇÃO ================= */
 function likeCount(id){ return likes[id]?likes[id].size:0; }
-function buildExport(scope){
-  const out={title:'Juízes comentado · EBD Jovens',chapters:[]};
-  BOOK.chapters.forEach((verses,i)=>{
-    const c=i+1,items=[];
-    verses.forEach((text,j)=>{
-      const v=j+1,arr=all[c+':'+v]||[];
-      if(scope==='full'||arr.length)items.push({v,text,arr});
-    });
-    if(items.length)out.chapters.push({c,items});
-  });
-  return out;
-}
 function orderThread(arr){
   const ids=new Set(arr.map(x=>x.id));
   const tops=arr.filter(x=>!x.parent||!ids.has(x.parent));
@@ -715,18 +1921,38 @@ function orderThread(arr){
     arr.filter(x=>x.parent===t.id).forEach(r=>res.push({cm:r,reply:true})); });
   return res;
 }
+function buildExport(scope){
+  const out={title:'Juízes comentado · EBD Jovens',chapters:[]};
+  BOOK.chapters.forEach((verses,i)=>{
+    const c=i+1,items=[];
+    verses.forEach((text,j)=>{
+      const v=j+1,arr=all[c+':'+v]||[];
+      if(scope==='full'||arr.length)items.push({v,text,arr});
+    });
+    const q=perguntas[c]?{text:perguntas[c],arr:all[c+':0']||[]}:null;
+    if(items.length||q)out.chapters.push({c,items,q});
+  });
+  return out;
+}
 $('exportMd').onclick=()=>{
   const d=buildExport($('exportScope').value);
   if(!d.chapters.length){ toast('Nenhum comentário para exportar ainda.'); return; }
   let md=`# ${d.title}\n\n> Texto bíblico: Almeida (domínio público)\n\n`;
   d.chapters.forEach(ch=>{
     md+=`## Juízes ${ch.c}\n\n`;
+    if(ch.q){
+      md+=`### Pergunta do professor\n\n${ch.q.text}\n\n`;
+      orderThread(ch.q.arr).forEach(({cm,reply})=>{
+        md+=`> ${reply?'↳ ':'✦ '}**${cm.author}${cm.prof?' (professor)':''}:** ${cm.text.replace(/\n/g,'\n> ')}\n>\n`;
+      });
+      md+='\n';
+    }
     ch.items.forEach(it=>{
       md+=`**${ch.c}:${it.v}** — ${it.text}\n\n`;
       if(it.arr.length){
         orderThread(it.arr).forEach(({cm,reply})=>{
           const am=likeCount(cm.id)?` _(${likeCount(cm.id)} améns)_`:'';
-          md+=`> ${reply?'↳ ':'✦ '}**${cm.author}:** ${cm.text.replace(/\n/g,'\n> ')}${am}\n>\n`;
+          md+=`> ${reply?'↳ ':'✦ '}**${cm.author}${cm.prof?' (professor)':''}:** ${cm.text.replace(/\n/g,'\n> ')}${am}\n>\n`;
         });
         md+='\n';
       } else md+=`> _Sem comentários._\n\n`;
@@ -739,19 +1965,23 @@ $('exportDoc').onclick=()=>{
   const d=buildExport($('exportScope').value);
   if(!d.chapters.length){ toast('Nenhum comentário para exportar ainda.'); return; }
   const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+  const cmP=(cm,reply)=>{
+    const am=likeCount(cm.id)?` <span style="color:#9C7A3C;font-size:9pt;">(${likeCount(cm.id)} améns)</span>`:'';
+    return `<p style="font-family:Georgia;font-size:11pt;margin-left:${reply?48:24}px;padding-left:10px;border-left:3px solid ${reply?'#DDD8C8':'#9C7A3C'};">
+      <b style="color:#5C6B47;">${reply?'↳ ':''}${esc(cm.author)}${cm.prof?' <span style="color:#9C7A3C;font-size:8pt;">PROFESSOR</span>':''}:</b> ${esc(cm.text)}${am}</p>`;
+  };
   let body=`<h1 style="font-family:Georgia;color:#3E4A31;">${esc(d.title)}</h1>
   <p style="color:#777;font-size:10pt;">Texto bíblico: Almeida (domínio público)</p>`;
   d.chapters.forEach(ch=>{
     body+=`<h2 style="font-family:Georgia;color:#3E4A31;border-bottom:1px solid #DDD8C8;">Juízes ${ch.c}</h2>`;
+    if(ch.q){
+      body+=`<p style="font-family:Georgia;font-size:11.5pt;background:#F5EEDD;padding:8px 10px;"><b style="color:#9C7A3C;">Pergunta do professor:</b> ${esc(ch.q.text)}</p>`;
+      orderThread(ch.q.arr).forEach(({cm,reply})=>body+=cmP(cm,reply));
+    }
     ch.items.forEach(it=>{
       body+=`<p style="font-family:Georgia;font-size:12pt;"><b style="color:#9C7A3C;">${ch.c}:${it.v}</b> ${esc(it.text)}</p>`;
-      if(it.arr.length){
-        orderThread(it.arr).forEach(({cm,reply})=>{
-          const am=likeCount(cm.id)?` <span style="color:#9C7A3C;font-size:9pt;">(${likeCount(cm.id)} améns)</span>`:'';
-          body+=`<p style="font-family:Georgia;font-size:11pt;margin-left:${reply?48:24}px;padding-left:10px;border-left:3px solid ${reply?'#DDD8C8':'#9C7A3C'};">
-          <b style="color:#5C6B47;">${reply?'↳ ':''}${esc(cm.author)}:</b> ${esc(cm.text)}${am}</p>`;
-        });
-      } else body+=`<p style="font-size:10pt;margin-left:24px;color:#999;"><i>Sem comentários.</i></p>`;
+      if(it.arr.length) orderThread(it.arr).forEach(({cm,reply})=>body+=cmP(cm,reply));
+      else body+=`<p style="font-size:10pt;margin-left:24px;color:#999;"><i>Sem comentários.</i></p>`;
     });
   });
   const html=`<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'>
