@@ -1,15 +1,27 @@
-{
-  "name": "Juízes comentado",
-  "short_name": "Juízes",
-  "description": "Comentário comunitário do livro de Juízes, versículo por versículo",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#FBFAF6",
-  "theme_color": "#3E4A31",
-  "lang": "pt-BR",
-  "icons": [
-    { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
-  ]
-}
+/* Service worker: deixa o app instalável e mantém o texto bíblico
+   disponível offline. Comentários exigem conexão (Firestore). */
+const CACHE = 'juizes-v3';
+const ASSETS = ['./', './index.html', './manifest.json', './icons/icon-192.png', './icons/icon-512.png'];
+
+self.addEventListener('install', e => {
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
+});
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
+  );
+});
+self.addEventListener('fetch', e => {
+  const url = new URL(e.request.url);
+  if (e.request.method !== 'GET' || url.origin !== location.origin) return; // Firestore/Auth passam direto
+  e.respondWith(
+    caches.match(e.request).then(hit => hit ||
+      fetch(e.request).then(res => {
+        const copy = res.clone();
+        caches.open(CACHE).then(c => c.put(e.request, copy));
+        return res;
+      }).catch(() => caches.match('./index.html'))
+    )
+  );
+});
